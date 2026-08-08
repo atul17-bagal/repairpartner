@@ -123,7 +123,9 @@
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke-width="1.8"/><path d="M21 21l-4.3-4.3" stroke-width="1.8" stroke-linecap="round"/></svg>
               <input type="text" id="itemSearchInput" placeholder="Search items…" oninput="renderItemGrid(this.value)">
             </div>
-            <div class="picker-grid" id="itemGrid"></div>
+            <div class="item-picker-scroll" id="itemPickerScroll">
+                <div class="picker-grid" id="itemGrid"></div>
+            </div>
             <p class="picker-hint" id="itemPickerHint"></p>
             <div class="field hidden" id="otherItemField" style="margin-top:16px;">
               <label for="otherItemInput">Please specify the item</label>
@@ -375,7 +377,6 @@
     { id:'a1', label:'Home', isDefault:true, name:'Ananya Kulkarni', mobile:'9876543210', line:'Flat 402, Sunrise Apartments, MG Road, Kothrud, Pune, Maharashtra – 411038' },
     { id:'a2', label:'Office', isDefault:false, name:'Ananya Kulkarni', mobile:'9876543210', line:'3rd Floor, Tech Park B, Baner Road, Baner, Pune, Maharashtra – 411045' },
   ];
-  const ITEM_PAGE_SIZE = 6; // "Book New Repair": show only the first 6 items by default — searching reveals the rest.
   const TIME_SLOTS = [
     { id:'morning', name:'Morning', range:'9:00 AM - 12:00 PM' },
     { id:'afternoon', name:'Afternoon', range:'12:00 PM - 3:00 PM' },
@@ -408,59 +409,148 @@
     )).join('');
   }
   function selectCategory(id, name){
-    state.category = id; state.categoryName = name;
-    state.item = null; state.isOther = false; state.otherText = '';
-    renderCategoryGrid();
-    document.getElementById('btnStep1Next').disabled = false;
-    document.getElementById('step2Sub').textContent = 'Choose the specific ' + name.toLowerCase() + ' item you\'d like repaired.';
+  state.category = id;
+  state.categoryName = name;
+  state.item = null;
+  state.isOther = false;
+  state.otherText = '';
+
+  // Clear previous item search
+  const searchInput = document.getElementById('itemSearchInput');
+
+  if(searchInput){
+    searchInput.value = '';
   }
+
+  renderCategoryGrid();
+
+  // Render all items for the newly selected category
+  renderItemGrid('');
+
+  document.getElementById('btnStep1Next').disabled = false;
+
+  document.getElementById('step2Sub').textContent =
+    'Choose the specific ' +
+    name.toLowerCase() +
+    ' item you\'d like repaired.';
+}
 
   /* ---------- step 2: item ---------- */
-  function renderItemGrid(filterText){
-    const grid = document.getElementById('itemGrid');
-    const hint = document.getElementById('itemPickerHint');
-    if(!state.category){ grid.innerHTML=''; hint.innerHTML=''; return; }
+function renderItemGrid(filterText = '') {
+  const grid = document.getElementById('itemGrid');
+  const hint = document.getElementById('itemPickerHint');
 
-    const all = ITEMS[state.category] || [];
-    const searching = !!filterText;
-    let items = all;
-    if(searching){
-      const f = filterText.toLowerCase();
-      items = all.filter(i => i.toLowerCase().includes(f));
-    } else if(all.length > ITEM_PAGE_SIZE){
-      items = all.slice(0, ITEM_PAGE_SIZE);
-    }
-
-    let html = items.map(item => (
-      '<button type="button" class="picker-card ' + (!state.isOther && state.item === item ? 'selected' : '') + '" onclick="selectItem(\'' + item.replace(/'/g,"\\'") + '\')">' +
-        '<div class="check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>' +
-        '<div class="icon-sq ' + ICON_TINT[state.category] + '">' + svgIcon(state.category) + '</div>' +
-        '<h4>' + item + '</h4><p>Tap to select</p>' +
-      '</button>'
-    )).join('');
-    html += '<button type="button" class="picker-card other-card ' + (state.isOther ? 'selected' : '') + '" onclick="selectOther()">' +
-        '<div class="check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>' +
-        '<div class="icon-sq"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke-width="1.8" stroke-linecap="round"/></svg></div>' +
-        '<h4>Other</h4><p>Not listed above</p>' +
-      '</button>';
-
-    if(items.length === 0 && searching){
-      grid.innerHTML = '<p class="picker-empty" style="grid-column:1/-1;">No items match “' + filterText + '”. Try a different search, or pick “Other” below.</p>' + html;
-    } else {
-      grid.innerHTML = html;
-    }
-
-    if(!searching && all.length > ITEM_PAGE_SIZE){
-      hint.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>' +
-        'Showing ' + ITEM_PAGE_SIZE + ' of ' + all.length + ' items — search above to see the rest.';
-    } else if(searching){
-      hint.innerHTML = items.length + ' item' + (items.length === 1 ? '' : 's') + ' match your search.';
-    } else {
-      hint.innerHTML = '';
-    }
-
-    document.getElementById('otherItemField').classList.toggle('hidden', !state.isOther);
+  if (!state.category) {
+    grid.innerHTML = '';
+    hint.innerHTML = '';
+    return;
   }
+
+  const all = ITEMS[state.category] || [];
+  const search = filterText.trim().toLowerCase();
+
+  // Filter the complete item list.
+  const items = search
+    ? all.filter(item => item.toLowerCase().includes(search))
+    : all;
+
+  let html = items.map(item => (
+    '<button type="button" class="picker-card ' +
+      (!state.isOther && state.item === item ? 'selected' : '') +
+      '" onclick="selectItem(\'' +
+      item.replace(/'/g, "\\'") +
+      '\')">' +
+
+      '<div class="check">' +
+        '<svg width="12" height="12" viewBox="0 0 24 24" fill="none">' +
+          '<path d="M5 13l4 4L19 7" ' +
+            'stroke="white" ' +
+            'stroke-width="2.5" ' +
+            'stroke-linecap="round" ' +
+            'stroke-linejoin="round"/>' +
+        '</svg>' +
+      '</div>' +
+
+      '<div class="icon-sq ' +
+        ICON_TINT[state.category] +
+      '">' +
+        svgIcon(state.category) +
+      '</div>' +
+
+      '<h4>' + item + '</h4>' +
+      '<p>Tap to select</p>' +
+
+    '</button>'
+  )).join('');
+
+  // Always keep "Other" as the last option.
+  html +=
+    '<button type="button" class="picker-card other-card ' +
+      (state.isOther ? 'selected' : '') +
+      '" onclick="selectOther()">' +
+
+      '<div class="check">' +
+        '<svg width="12" height="12" viewBox="0 0 24 24" fill="none">' +
+          '<path d="M5 13l4 4L19 7" ' +
+            'stroke="white" ' +
+            'stroke-width="2.5" ' +
+            'stroke-linecap="round" ' +
+            'stroke-linejoin="round"/>' +
+        '</svg>' +
+      '</div>' +
+
+      '<div class="icon-sq">' +
+        '<svg width="20" height="20" viewBox="0 0 24 24" fill="none">' +
+          '<path d="M12 5v14M5 12h14" ' +
+            'stroke-width="1.8" ' +
+            'stroke-linecap="round"/>' +
+        '</svg>' +
+      '</div>' +
+
+      '<h4>Other</h4>' +
+      '<p>Not listed above</p>' +
+
+    '</button>';
+
+  // No search result.
+  if (items.length === 0 && search) {
+
+    grid.innerHTML =
+      '<p class="picker-empty" style="grid-column:1/-1;">' +
+        'No items match “' +
+        filterText +
+        '”. Try a different search, or pick “Other” below.' +
+      '</p>' +
+      html;
+
+  } else {
+
+    grid.innerHTML = html;
+
+  }
+
+  // Hint below the scroll area.
+  if (search) {
+
+    hint.textContent =
+      items.length +
+      ' item' +
+      (items.length === 1 ? '' : 's') +
+      ' match your search.';
+
+  } else {
+
+    hint.textContent =
+      all.length +
+      ' items available — scroll to see more.';
+
+  }
+
+  document
+    .getElementById('otherItemField')
+    .classList.toggle('hidden', !state.isOther);
+}
+
   function selectItem(item){
     state.item = item; state.isOther = false; state.otherText = '';
     renderItemGrid(document.getElementById('itemSearchInput').value);
@@ -656,17 +746,37 @@
   }
 
   function goToStep(n){
-    currentStep = n;
-    document.querySelectorAll('.wizard-panel').forEach(p => p.classList.toggle('active', +p.dataset.panel === n));
-    document.querySelectorAll('.wizard-step').forEach(s => {
-      const step = +s.dataset.step;
-      s.classList.toggle('active', step === n);
-      s.classList.toggle('done', step < n);
-    });
-    if(n === 5) renderTimeSlots();
-    if(n === 6) populateReview();
-    window.scrollTo({ top:0, behavior:'smooth' });
+  currentStep = n;
+
+  document.querySelectorAll('.wizard-panel').forEach(p => {
+    p.classList.toggle('active', +p.dataset.panel === n);
+  });
+
+  document.querySelectorAll('.wizard-step').forEach(s => {
+    const step = +s.dataset.step;
+    s.classList.toggle('active', step === n);
+    s.classList.toggle('done', step < n);
+  });
+
+  /* Render items whenever Step 2 is opened */
+  if(n === 2){
+    const searchInput = document.getElementById('itemSearchInput');
+
+    if(searchInput){
+      renderItemGrid(searchInput.value);
+    } else {
+      renderItemGrid('');
+    }
   }
+
+  if(n === 5) renderTimeSlots();
+  if(n === 6) populateReview();
+
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+}
 
   function confirmBooking(){
     const btn = document.getElementById('btnSubmitRepair');
