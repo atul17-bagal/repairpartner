@@ -61,8 +61,8 @@ section{ padding:var(--sp-8) 0; }
 .nav-actions .signin{ position:relative; color:rgba(255,255,255,0.9); font-size:15px; font-weight:500; transition:color .2s ease; }
 .nav-actions .signin:hover{ color:var(--white); }
 .install-btn{
-  display:none; align-items:center; gap:6px; background:rgba(255,255,255,0.14); color:var(--white);
-  border:1.5px solid rgba(255,255,255,0.4); font-size:13.5px; font-weight:600; padding:9px 14px;
+  display:none; align-items:center; gap:6px; background:#007A7A; color:var(--white);
+  border:1.5px solid rgba(255,255,255,0.4); font-size:13.5px; font-weight:600; padding:9px 7px;
   border-radius:var(--radius-btn); transition:all .18s ease; white-space:nowrap;
 }
 .install-btn.is-visible{ display:none; }
@@ -80,7 +80,7 @@ section{ padding:var(--sp-8) 0; }
   display:none; width:100%; text-align:left; background:none; border:none; border-top:1px solid rgba(255,255,255,0.15);
   color:var(--white); font-size:15px; padding:14px var(--sp-3); font-family:inherit; cursor:pointer; align-items:center; gap:8px;
 }
-.mobile-drawer-install.is-visible{ display:flex; }
+.mobile-drawer-install.is-visible{ display:none; }
 .mobile-drawer-install:hover{ background:rgba(255,255,255,0.08); }
 .mobile-drawer-install svg{ width:16px; height:16px; flex:none; }
 
@@ -146,6 +146,7 @@ footer h4{ font-size:14px; margin-bottom:var(--sp-2); }
 
 @media (max-width:900px){
   section{ padding:var(--sp-6) 0; }
+  .btn{ display: none;}
   .nav-links, .nav-actions .signin{ display:none; }
   .hamburger{ display:flex; }
   .mobile-drawer{ display:flex; }
@@ -157,7 +158,7 @@ footer h4{ font-size:14px; margin-bottom:var(--sp-2); }
 }
 @media (max-width:480px){
   .footer-grid{ grid-template-columns:1fr; }
-  .install-btn.is-visible{ display:none; }
+  .install-btn.is-visible{ display:flex; }
 }
 </style>
 </head>
