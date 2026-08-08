@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contact Us — Repair Partner</title>
+<title>About Us — Repair Partner</title>
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#009999">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
@@ -44,8 +44,10 @@ section{ padding:var(--sp-8) 0; }
 .btn:active{ transform:translateY(0); }
 .btn-light{ background:var(--white); color:var(--ink); }
 .btn-light:hover{ background:#EFF3F2; }
-.btn-primary{ background:var(--teal); color:var(--white); width:100%; }
+.btn-primary{ background:var(--teal); color:var(--white); }
 .btn-primary:hover{ background:var(--teal-dark); }
+.btn-secondary{ background:var(--white); color:var(--ink); border-color:var(--border); }
+.btn-secondary:hover{ border-color:var(--teal); color:var(--teal); }
 
 /* Navbar (shared) */
 .navbar{ background:var(--teal); }
@@ -89,45 +91,49 @@ section{ padding:var(--sp-8) 0; }
 .page-hero h1{ color:var(--white); font-size:36px; margin-bottom:8px; }
 .page-hero p{ color:rgba(255,255,255,0.88); font-size:16px; max-width:560px; }
 
-.icon-sq{ width:44px; height:44px; border-radius:10px; background:var(--teal-tint); display:flex; align-items:center; justify-content:center; flex:none; }
+.section-head{ text-align:center; max-width:560px; margin:0 auto var(--sp-5); }
+.section-head h2{ font-size:28px; margin-bottom:8px; }
+.section-head p{ color:var(--ink-soft); font-size:16px; }
+.section-alt{ background:var(--bg-alt); }
+
+/* Story */
+.story-grid{ display:grid; grid-template-columns:1fr 1fr; gap:var(--sp-6); align-items:center; }
+.story-copy h2{ font-size:28px; margin-bottom:var(--sp-2); }
+.story-copy p{ color:var(--ink-soft); margin-bottom:var(--sp-2); font-size:15.5px; }
+.story-visual{
+  background:var(--teal-tint); border-radius:var(--radius-card); padding:var(--sp-5);
+  display:grid; grid-template-columns:1fr 1fr; gap:var(--sp-2);
+}
+.story-stat{ background:var(--white); border-radius:12px; padding:var(--sp-3); text-align:center; }
+.story-stat b{ display:block; font-family:'Poppins',sans-serif; font-size:26px; color:var(--teal-dark); }
+.story-stat span{ font-size:13px; color:var(--ink-soft); }
+
+/* story-visual hidden per current requirements (kept in markup/CSS for future re-enable) */
+.story-visual{ display:none; }
+.story-grid{ grid-template-columns:1fr; max-width:700px; margin:0 auto; }
+.story-grid .story-copy{ text-align:center; }
+.story-grid .story-copy p{ text-align:left; }
+
+/* Values */
+.values-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:var(--sp-2); }
+.value-card{ background:var(--white); border:1px solid var(--border); border-radius:var(--radius-card); padding:var(--sp-3); transition:border-color .2s ease, transform .2s ease; }
+.value-card:hover{ border-color:var(--teal); transform:translateY(-3px); }
+.icon-sq{ width:44px; height:44px; border-radius:10px; background:var(--teal-tint); display:flex; align-items:center; justify-content:center; margin-bottom:var(--sp-2); flex:none; }
 .icon-sq svg *{ stroke:var(--teal); }
+.value-card h4{ font-size:16px; margin-bottom:4px; }
+.value-card p{ font-size:13.5px; color:var(--ink-soft); }
 
-/* Contact layout */
-.contact-grid{ display:grid; grid-template-columns:0.9fr 1.1fr; gap:var(--sp-5); align-items:start; }
+/* Timeline / process */
+.timeline{ display:grid; grid-template-columns:repeat(3,1fr); gap:var(--sp-3); }
+.timeline-item{ background:var(--white); border:1px solid var(--border); border-radius:var(--radius-card); padding:var(--sp-3); }
+.timeline-year{ display:inline-block; font-size:13px; font-weight:700; color:var(--teal-dark); background:var(--teal-tint); padding:4px 12px; border-radius:999px; margin-bottom:var(--sp-2); }
+.timeline-item h4{ font-size:16px; margin-bottom:4px; }
+.timeline-item p{ font-size:13.5px; color:var(--ink-soft); }
 
-.info-card{
-  display:flex; gap:var(--sp-2); align-items:flex-start;
-  background:var(--white); border:1px solid var(--border); border-radius:var(--radius-card);
-  padding:var(--sp-3); margin-bottom:var(--sp-2); transition:border-color .2s ease;
-}
-.info-card:hover{ border-color:var(--teal); }
-.info-card h4{ font-size:15px; margin-bottom:2px; }
-.info-card p, .info-card a.info-value{ font-size:13.5px; color:var(--ink-soft); }
-.info-card a.info-value:hover{ color:var(--teal); }
-.stars-inline{ color:var(--gold); font-size:13px; letter-spacing:1px; margin-bottom:2px; }
-
-.map-card{
-  border:1px solid var(--border); border-radius:var(--radius-card); overflow:hidden; margin-top:var(--sp-3);
-}
-.map-card iframe{ width:100%; height:260px; border:0; display:block; }
-.map-caption{ padding:var(--sp-2) var(--sp-3); display:flex; align-items:center; justify-content:space-between; background:var(--bg-alt); }
-.map-caption span{ font-size:13px; color:var(--ink-soft); }
-.map-caption a{ font-size:13px; font-weight:600; color:var(--teal-dark); }
-
-/* Form */
-.form-card{ background:var(--bg-alt); border:1px solid var(--border); border-radius:var(--radius-card); padding:var(--sp-4); }
-.form-card h3{ font-size:20px; margin-bottom:4px; }
-.form-card > p{ font-size:13.5px; color:var(--ink-soft); margin-bottom:var(--sp-3); }
-.field{ margin-bottom:var(--sp-2); }
-.field label{ display:block; font-size:13.5px; font-weight:600; margin-bottom:6px; }
-.field input, .field select, .field textarea{
-  width:100%; font-family:inherit; font-size:14.5px; color:var(--ink);
-  background:var(--white); border:1.5px solid var(--border); border-radius:var(--radius-btn);
-  padding:12px 14px; transition:border-color .18s ease;
-}
-.field input:focus, .field select:focus, .field textarea:focus{ outline:none; border-color:var(--teal); }
-.field textarea{ resize:vertical; min-height:110px; }
-.field-row{ display:grid; grid-template-columns:1fr 1fr; gap:var(--sp-2); }
+/* CTA banner */
+.cta-banner{ background:var(--teal); text-align:center; padding:var(--sp-8) var(--sp-3); border-radius:var(--radius-card); }
+.cta-banner h2{ color:var(--white); font-size:28px; margin-bottom:8px; }
+.cta-banner p{ color:rgba(255,255,255,0.88); margin-bottom:var(--sp-3); }
 
 /* Footer (shared) */
 footer{ background:var(--bg-alt); border-top:1px solid var(--border); }
@@ -144,6 +150,8 @@ footer h4{ font-size:14px; margin-bottom:var(--sp-2); }
 .footer-contact a:hover{ color:var(--teal); }
 .footer-bottom{ border-top:1px solid var(--border); text-align:center; padding:var(--sp-2) 0; font-size:12.5px; color:var(--ink-soft); }
 
+.chat-fab{ position:fixed; bottom:24px; right:24px; width:52px; height:52px; border-radius:50%; background:var(--teal); display:flex; align-items:center; justify-content:center; box-shadow:0 6px 18px rgba(0,153,153,0.35); z-index:50; }
+
 @media (max-width:900px){
   section{ padding:var(--sp-6) 0; }
   .btn{ display: none;}
@@ -151,8 +159,9 @@ footer h4{ font-size:14px; margin-bottom:var(--sp-2); }
   .hamburger{ display:flex; }
   .mobile-drawer{ display:flex; }
   .page-hero h1{ font-size:28px; }
-  .contact-grid{ grid-template-columns:1fr; gap:var(--sp-4); }
-  .field-row{ grid-template-columns:1fr; }
+  .story-grid{ grid-template-columns:1fr; gap:var(--sp-4); }
+  .values-grid{ grid-template-columns:1fr 1fr; }
+  .timeline{ grid-template-columns:1fr; }
   .footer-grid{ grid-template-columns:1fr 1fr; gap:var(--sp-3); }
   .footer-brand{ grid-column:1/-1; }
 }
@@ -177,6 +186,7 @@ footer h4{ font-size:14px; margin-bottom:var(--sp-2); }
     line-height: 1.1;
     color: var(--white);
   }
+  .values-grid{ grid-template-columns:1fr; }
   .footer-grid{ grid-template-columns:1fr; }
   .install-btn.is-visible{ display:flex; }
 }
@@ -208,8 +218,8 @@ footer h4{ font-size:14px; margin-bottom:var(--sp-2); }
     <nav class="nav-links">
       <a href="index.html">Home</a>
       <a href="services.html">Services</a>
-      <a href="about.html">About Us</a>
-      <a href="contact.html" class="active">Contact</a>
+      <a href="about.html" class="active">About Us</a>
+      <a href="contact.html">Contact</a>
     </nav>
     <div class="nav-actions">
       <button class="install-btn" id="installAppBtn" aria-label="Install App" type="button">
@@ -237,87 +247,69 @@ footer h4{ font-size:14px; margin-bottom:var(--sp-2); }
 
 <section class="page-hero">
   <div class="wrap">
-    <h1>Contact Us</h1>
-    <p>Have a question, a repair request, or feedback? We'd love to hear from you.</p>
+    <h1>About Repair Partner</h1>
+    <p>We started Repair Partner to fix a simple problem: getting something repaired in Pune shouldn't mean three phone calls, a lost afternoon, and a technician who never quite shows up.</p>
   </div>
 </section>
 
+<!-- STORY -->
 <section>
-  <div class="wrap contact-grid">
+  <div class="wrap story-grid">
+    <div class="story-copy">
+      <h2>Built around one idea: repairs shouldn't be your problem to manage</h2>
+      <p>Most repair experiences put the work on you — finding a technician, negotiating a price, following up on delays, and hoping the fix actually holds. We built Repair Partner to remove every one of those steps.</p>
+      <p>Today, our technicians handle everything from kitchen appliances to power tools, picking items up from your doorstep and returning them tested, repaired, and backed by a written warranty — no showroom visit required.</p>
+      <a href="contact.html" class="btn btn-primary">Get in Touch</a>
+    </div>
+    <div class="story-visual">
+      <div class="story-stat"><b>2000+</b><span>Repairs Completed</span></div>
+      <div class="story-stat"><b>24–48 hrs</b><span>Avg. Turnaround</span></div>
+      <div class="story-stat"><b>4.9★</b><span>Customer Rating</span></div>
+      <div class="story-stat"><b>10+</b><span>Categories Repaired</span></div>
+    </div>
+  </div>
+</section>
 
-    <!-- LEFT: contact info + map -->
-    <div>
-      <div class="info-card">
-        <div class="icon-sq"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 5h16v14H4z" stroke-width="1.7" stroke-linejoin="round"/><path d="M4 6l8 7 8-7" stroke-width="1.7" stroke-linejoin="round"/></svg></div>
-        <div>
-          <h4>Email</h4>
-          <a class="info-value" href="mailto:hello@repairpartner.in">hello@repairpartner.in</a>
-        </div>
+<!-- VALUES -->
+<section class="section-alt">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>What We Stand For</h2>
+      <p>The principles every repair, pickup, and conversation runs on.</p>
+    </div>
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="icon-sq"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h10M4 17h7" stroke-width="1.8" stroke-linecap="round"/><circle cx="19" cy="17" r="2.5" stroke-width="1.8"/></svg></div>
+        <h4>Transparency</h4>
+        <p>Fair pricing, honest recommendations, and quality repairs are at the heart of everything we do.</p>
       </div>
-
-      <div class="info-card">
-        <div class="icon-sq"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 5c0 8.3 6.7 15 15 15l3-4-6-3-2 2c-2.5-1.2-4.5-3.2-5.7-5.7l2-2-3-6-4 3z" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
-        <div>
-          <h4>Phone</h4>
-          <a class="info-value" href="tel:+919876543210">+91 98765 43210</a><br>
-          <a class="info-value" href="tel:+919123456780">+91 91234 56780</a>
-        </div>
+      <div class="value-card">
+        <div class="icon-sq"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke-width="1.8"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <h4>Craftsmanship</h4>
+        <p>Every technician is verified and trained on the specific category they handle.</p>
       </div>
-
-      <div class="info-card">
-        <div class="icon-sq"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2l2.9 6 6.6.6-5 4.5 1.5 6.5-6-3.6-6 3.6 1.5-6.5-5-4.5 6.6-.6z" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
-        <div>
-          <h4>Rate Us</h4>
-          <div class="stars-inline">★★★★★</div>
-          <a class="info-value" href="#" target="_blank" rel="noopener">Leave a review on Google</a>
-        </div>
+      <div class="value-card">
+        <div class="icon-sq"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke-width="1.8"/><path d="M12 7v5l3 3" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <h4>Reliability</h4>
+        <p>From timely pickups to on-time delivery, we respect your schedule and strive to keep every commitment we make.</p>
       </div>
-
-      <div class="map-card">
-        <iframe src="https://www.google.com/maps?q=Baner,Pune,Maharashtra&output=embed" loading="lazy" title="Repair Partner location map" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        <div class="map-caption">
-          <span>Baner Road, Pune, Maharashtra 411045</span>
-          <a href="https://www.google.com/maps?q=Baner,Pune,Maharashtra" target="_blank" rel="noopener">Get Directions →</a>
-        </div>
+      <div class="value-card">
+        <div class="icon-sq"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 3l7 3v6c0 5-3.5 7.5-7 9-3.5-1.5-7-4-7-9V6l7-3z" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h4>Accountability</h4>
+        <p>We stand behind the quality of every repair. If something isn't right, we'll make it right because customer satisfaction is our priority.</p>
       </div>
     </div>
+  </div>
+</section>
 
-    <!-- RIGHT: message form -->
-    <div class="form-card">
-      <h3>Send Us a Message</h3>
-      <p>Fill in the details below and we'll get back to you within 24 hours.</p>
-      <form onsubmit="return false;">
-        <div class="field-row">
-          <div class="field">
-            <label for="name">Full Name</label>
-            <input id="name" type="text" placeholder="Your name" required>
-          </div>
-          <div class="field">
-            <label for="phone">Phone Number</label>
-            <input id="phone" type="tel" placeholder="+91 98765 43210" required>
-          </div>
-        </div>
-        <div class="field">
-          <label for="email">Email</label>
-          <input id="email" type="email" placeholder="you@email.com" required>
-        </div>
-        <div class="field">
-          <label for="topic">What can we help with?</label>
-          <select id="topic">
-            <option>Book a repair</option>
-            <option>Bulk / business repair enquiry</option>
-            <option>Order status</option>
-            <option>General question</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="message">Message</label>
-          <textarea id="message" placeholder="Tell us what's broken, or how we can help..." required></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Send Message</button>
-      </form>
+<!-- CTA -->
+<section>
+  <div class="wrap">
+    <div class="cta-banner">
+      <h2>Have Something That Needs Fixing?</h2>
+      <p>Tell us what's broken — we'll take it from there.</p>
+      <a href="contact.html" class="btn btn-light">Contact Us</a>
     </div>
-
   </div>
 </section>
 
@@ -359,6 +351,10 @@ footer h4{ font-size:14px; margin-bottom:var(--sp-2); }
     <div class="footer-bottom">© 2026 Repair Partner. All rights reserved.</div>
   </div>
 </footer>
+
+<a href="contact.html" class="chat-fab" aria-label="Chat with us">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M21 11.5a8.5 8.5 0 01-8.5 8.5c-1.2 0-2.3-.25-3.3-.7L4 20l1-4.8A8.5 8.5 0 1121 11.5z" stroke="white" stroke-width="1.8" stroke-linejoin="round"/></svg>
+</a>
 
 <script>
 (function(){
