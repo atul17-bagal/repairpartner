@@ -876,3 +876,40 @@ textarea:focus-visible, [tabindex]:focus-visible{
 .empty svg{margin-bottom:10px; color:var(--ink-faint);}
 .empty h4{font-size:16px; margin-bottom:6px; color:var(--ink);}
 .empty p{font-size:13.5px; margin-bottom:16px;}
+
+/* =========================================================
+   BOOK REPAIR - ITEM SCROLL CONTAINER
+   ========================================================= */
+
+.item-picker-scroll {
+  width: 100%;
+  max-height: 330px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  
+  /* Invisible scrollbar */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.item-picker-scroll::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.item-picker-scroll .picker-grid {
+  width: 100%;
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .item-picker-scroll {
+    max-height: 300px;
+  }
+  .topbar-title {
+    font-size: 17px;
+    line-height: 1.15;
+    margin: 0;
+  }
+}
