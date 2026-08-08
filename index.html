@@ -52,6 +52,8 @@ section{ padding:var(--sp-8) 0; }
 .btn:active{ transform:translateY(0); }
 .btn-light{ background:var(--white); color:var(--ink); }
 .btn-light:hover{ background:#EFF3F2; }
+.btn-light-navbar{ background:var(--white); color:var(--ink); }
+.btn-light-navbar:hover{ background:#EFF3F2; }
 .btn-outline{ background:transparent; color:var(--white); border-color:rgba(255,255,255,0.6); }
 .btn-outline:hover{ background:rgba(255,255,255,0.12); }
 .btn-primary{ background:var(--teal); color:var(--white); }
@@ -222,7 +224,7 @@ footer h4{ font-size:14px; margin-bottom:var(--sp-2); }
 /* ---------- Mobile ---------- */
 @media (max-width:900px){
   section{ padding:var(--sp-6) 0; }
-  .btn{ display: none;}
+  .btn-light-navbar{ display: none;}
   .nav-links, .nav-actions .signin{ display:none; }
   .hamburger{ display:flex; }
   .mobile-drawer{ display:flex; }
@@ -244,6 +246,26 @@ footer h4{ font-size:14px; margin-bottom:var(--sp-2); }
   .footer-brand{ grid-column:1/-1; }
 }
 @media (max-width:480px){
+  .logo {
+    position: relative;
+    font-size: 0; /* hides original "Repair Partner" text */
+  }
+
+  /* Keep the Rp mark visible */
+  .logo .logo-mark {
+    margin-right: -6px;
+    font-size: initial; /* restore size for SVG */
+  }
+
+  /* Inject stacked text */
+  .logo::after {
+    content: "Repair\A Partner"; /* stacked text */
+    white-space: pre;            /* respect line break */
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.1;
+    color: var(--white);
+  }
   .steps-row{ grid-template-columns:1fr; }
   .footer-grid{ grid-template-columns:1fr; }
   .install-btn.is-visible{ display:flex; }
@@ -286,7 +308,7 @@ footer h4{ font-size:14px; margin-bottom:var(--sp-2); }
         <span>Install App</span>
       </button>
       <a href="signin.html" class="signin">Sign In</a>
-      <a href="signup.html" class="btn btn-light">Sign Up</a>
+      <a href="signup.html" class="btn btn-light-navbar">Sign Up</a>
       <button class="hamburger" aria-label="Menu" onclick="document.querySelector('.mobile-drawer').classList.toggle('open')"><span></span></button>
     </div>
   </div>
