@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profile — Repair Partner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .profile-panel{ display:none; }
+  .profile-panel.active{ display:block; animation:fadeUp .2s ease; }
+  @keyframes fadeUp{ from{ opacity:0; transform:translateY(6px); } to{ opacity:1; transform:translateY(0); } }
+  .pw-field-wrap{ position:relative; }
+  .pw-toggle{ position:absolute; right:12px; top:50%; transform:translateY(-50%); background:none; border:none; color:var(--ink-soft); padding:2px; }
+  .pw-toggle:hover{ color:var(--ink); }
+</style>
+</head>
+<body>
+  <script src="app.js"></script>
+
+<div class="dash-shell">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <span class="logo-mark"><svg width="22" height="22" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+        <text
+            x="50%"
+            y="52%"
+            text-anchor="middle"
+            dominant-baseline="middle"
+            font-family="Poppins, Arial, sans-serif"
+            font-size="53"
+            font-weight="650"
+            letter-spacing="0"
+            fill="#FFFFFF">
+            Rp
+        </text>
+    </svg></span>
+      <span class="sidebar-brand-name">Repair Partner</span>
+      <button class="sidebar-close" aria-label="Close menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-section-label">Menu</div>
+      <a href="dashboard.html" class="sidebar-link" data-page="dashboard.html">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="8" height="8" rx="1.5" stroke-width="1.7"/><rect x="13" y="3" width="8" height="5" rx="1.5" stroke-width="1.7"/><rect x="13" y="12" width="8" height="9" rx="1.5" stroke-width="1.7"/><rect x="3" y="15" width="8" height="6" rx="1.5" stroke-width="1.7"/></svg>
+        Dashboard
+      </a>
+      <a href="my-repairs.html" class="sidebar-link" data-page="my-repairs.html">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M14.7 6.3a4 4 0 00-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 005.4-5.4l-2.3 2.3-2-2 2.3-2.3z" stroke-width="1.7" stroke-linejoin="round"/></svg>
+        My Repairs
+      </a>
+      <a href="book-repair.html" class="sidebar-link" data-page="book-repair.html">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke-width="1.8" stroke-linecap="round"/></svg>
+        Book New Repair
+      </a>
+      <a href="bulk-repair.html" class="sidebar-link" data-page="bulk-repair.html">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="7" height="7" rx="1.4" stroke-width="1.7"/><rect x="14" y="4" width="7" height="7" rx="1.4" stroke-width="1.7"/><rect x="3" y="13" width="7" height="7" rx="1.4" stroke-width="1.7"/><rect x="14" y="13" width="7" height="7" rx="1.4" stroke-width="1.7"/></svg>
+        Bulk Repair Request
+      </a>
+      <div class="sidebar-cta">
+        <p>Need help with an ongoing repair?</p>
+        <a href="contact-support.html" class="btn btn-secondary btn-sm btn-block">Contact Support</a>
+      </div>
+    </nav>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <div class="dash-main">
+    <header class="dash-topbar">
+      <button class="topbar-menu-btn" aria-label="Open menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+      <h1 class="topbar-title">My Profile</h1>
+      <div class="topbar-actions">
+        <div class="popover-anchor">
+          <button class="icon-btn" data-popover-trigger="notifPopover" aria-label="Notifications">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M18 8a6 6 0 00-12 0c0 7-3 9-3 9h18s-3-2-3-9" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M13.7 21a2 2 0 01-3.4 0" stroke-width="1.7" stroke-linecap="round"/></svg>
+            <span class="dot" data-notif-dot></span>
+          </button>
+          <div class="popover" id="notifPopover">
+            <div class="popover-head"><h4>Notifications</h4><button class="link-teal" data-notif-mark-all>Mark all read</button></div>
+            <div class="popover-body" data-notif-body></div>
+            <div class="popover-foot"><a href="my-repairs.html" class="link-teal">View all repairs</a></div>
+          </div>
+        </div>
+        <!-- Same account popover component used on every page (see RP.renderAccountPopover) —
+             here it switches tabs in place instead of navigating. -->
+        <div class="popover-anchor">
+          <button class="icon-btn" data-popover-trigger="userPopover" aria-label="Account menu" style="width:auto;height:auto;border-radius:var(--radius-sm);padding:4px;">
+            <span class="avatar" data-user-initials>AK</span>
+          </button>
+          <div class="popover" id="userPopover" style="width:270px;"></div>
+        </div>
+      </div>
+    </header>
+
+    <main class="dash-content">
+      <div class="page-head">
+        <div>
+          <h1>My Profile</h1>
+          <p>Manage your personal information, addresses, security and notification preferences.</p>
+        </div>
+      </div>
+
+      <!-- PERSONAL INFO -->
+      <div class="profile-panel active" data-panel="personal">
+        <div class="card card-pad-lg">
+          <div class="flex-row" style="margin-bottom:var(--sp-4);">
+            <span class="avatar avatar-xl" data-user-initials>AK</span>
+            <div>
+              <h3 style="font-size:18px;" data-user-name>Ananya Kulkarni</h3>
+              <p class="text-soft" style="font-size:13px;">Member since Mar 2023</p>
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="pfName">Full Name</label>
+              <input id="pfName" type="text" value="Ananya Kulkarni">
+            </div>
+            <div class="field">
+              <label for="pfPhone">Mobile Number</label>
+              <input id="pfPhone" type="tel" value="9876543210">
+            </div>
+          </div>
+          <div class="field">
+            <label for="pfEmail">Email Address</label>
+            <input id="pfEmail" type="email" value="ananya.kulkarni@example.com">
+          </div>
+          <button class="btn btn-primary" onclick="toast('Profile updated successfully.','success')">Save Changes</button>
+        </div>
+      </div>
+
+      <!-- ADDRESSES -->
+      <div class="profile-panel" data-panel="addresses">
+        <div class="card card-pad-lg">
+          <div class="section-card-head">
+            <h3>Saved Addresses</h3>
+            <button class="link-teal" onclick="toggleAddAddress()">+ Add New Address</button>
+          </div>
+
+          <div id="addAddressForm" class="hidden" style="border:1px dashed var(--border); border-radius:var(--radius-card); padding:var(--sp-3); margin-bottom:var(--sp-3);">
+            <div class="field-row">
+              <div class="field">
+                <label for="naLabel">Label</label>
+                <input id="naLabel" type="text" placeholder="e.g. Home, Office">
+              </div>
+              <div class="field">
+                <label for="naMobile">Mobile Number</label>
+                <input id="naMobile" type="tel" placeholder="98765 43210">
+              </div>
+            </div>
+            <div class="field">
+              <label for="naName">Contact Name</label>
+              <input id="naName" type="text" placeholder="Full name">
+            </div>
+            <div class="field">
+              <label for="naAddress">Full Address</label>
+              <textarea id="naAddress" placeholder="Flat / House no., Building, Street, Area, City, Pincode"></textarea>
+            </div>
+            <div class="flex-row">
+              <button class="btn btn-primary btn-sm" onclick="saveNewAddress()">Save Address</button>
+              <button class="btn btn-ghost btn-sm" onclick="toggleAddAddress()">Cancel</button>
+            </div>
+          </div>
+
+          <div id="addressCardList"></div>
+        </div>
+      </div>
+
+      <!-- PASSWORD -->
+      <div class="profile-panel" data-panel="password">
+        <div class="card card-pad-lg" style="max-width:460px;">
+          <div class="section-card-head"><h3>Change Password</h3></div>
+          <div class="field" id="fld-current">
+            <label for="curPass">Current Password</label>
+            <div class="pw-field-wrap">
+              <input id="curPass" type="password" placeholder="Enter current password">
+              <button type="button" class="pw-toggle" onclick="togglePw('curPass')">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.6"/></svg>
+              </button>
+            </div>
+            <div class="error-msg">Enter your current password.</div>
+          </div>
+          <div class="field" id="fld-new">
+            <label for="newPass">New Password</label>
+            <div class="pw-field-wrap">
+              <input id="newPass" type="password" placeholder="At least 8 characters" oninput="checkPwStrength()">
+              <button type="button" class="pw-toggle" onclick="togglePw('newPass')">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.6"/></svg>
+              </button>
+            </div>
+            <div class="hint" id="pwStrengthHint">Use 8+ characters with a mix of letters and numbers.</div>
+            <div class="error-msg">Password must be at least 8 characters.</div>
+          </div>
+          <div class="field" id="fld-confirm">
+            <label for="confirmPass">Confirm New Password</label>
+            <input id="confirmPass" type="password" placeholder="Re-enter new password">
+            <div class="error-msg">Passwords do not match.</div>
+          </div>
+          <button class="btn btn-primary" onclick="changePassword()">Update Password</button>
+        </div>
+      </div>
+
+      <!-- NOTIFICATIONS -->
+      <div class="profile-panel" data-panel="notifications">
+        <div class="card card-pad-lg">
+          <div class="section-card-head"><h3>Notification Settings</h3></div>
+          <div id="notifSettingsList"></div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<script>
+  /* ---------- addresses (demo data, local only) ---------- */
+  let addresses = [
+    { id:'a1', label:'Home', isDefault:true, name:'Ananya Kulkarni', mobile:'9876543210', address:'Flat 402, Sunrise Apartments, MG Road, Kothrud, Pune, Maharashtra – 411038' },
+    { id:'a2', label:'Office', isDefault:false, name:'Ananya Kulkarni', mobile:'9876543210', address:'3rd Floor, Tech Park B, Baner Road, Baner, Pune, Maharashtra – 411045' },
+  ];
+  function renderAddresses(){
+    const el = document.getElementById('addressCardList');
+    if(!addresses.length){ el.innerHTML = '<div class="empty"><p>No saved addresses yet.</p></div>'; return; }
+    el.innerHTML = addresses.map(a => (
+      '<div class="address-card" style="margin-bottom:12px; cursor:default;">' +
+        '<div class="flex-row" style="justify-content:space-between;">' +
+          '<h4>' + a.label + (a.isDefault ? ' <span class="badge badge-teal">Default</span>' : '') + '</h4>' +
+          '<div class="flex-row">' +
+            (!a.isDefault ? '<button class="link-teal" style="font-size:12.5px;" onclick="makeDefault(\'' + a.id + '\')">Set Default</button>' : '') +
+            '<button class="link-teal" style="font-size:12.5px; color:var(--red);" onclick="deleteAddress(\'' + a.id + '\')">Remove</button>' +
+          '</div>' +
+        '</div>' +
+        '<p>' + a.name + ' · ' + a.mobile + '<br>' + a.address + '</p>' +
+      '</div>'
+    )).join('');
+  }
+  function toggleAddAddress(){ document.getElementById('addAddressForm').classList.toggle('hidden'); }
+  function saveNewAddress(){
+    const label = document.getElementById('naLabel').value.trim();
+    const mobile = document.getElementById('naMobile').value.trim();
+    const name = document.getElementById('naName').value.trim();
+    const address = document.getElementById('naAddress').value.trim();
+    if(!label || !mobile || !name || !address){ toast('Please fill in all address fields.', 'error'); return; }
+    addresses.push({ id:'addr-' + Date.now(), label, name, mobile, address, isDefault: addresses.length === 0 });
+    ['naLabel','naMobile','naName','naAddress'].forEach(id => document.getElementById(id).value = '');
+    toggleAddAddress();
+    renderAddresses();
+    toast('Address saved.', 'success');
+  }
+  function makeDefault(id){
+    addresses.forEach(a => a.isDefault = (a.id === id));
+    renderAddresses();
+    toast('Default address updated.', 'success');
+  }
+  function deleteAddress(id){
+    addresses = addresses.filter(a => a.id !== id);
+    if(addresses.length && !addresses.some(a => a.isDefault)) addresses[0].isDefault = true;
+    renderAddresses();
+    toast('Address removed.', 'success');
+  }
+
+  /* ---------- password ---------- */
+  function togglePw(id){
+    const input = document.getElementById(id);
+    input.type = input.type === 'password' ? 'text' : 'password';
+  }
+  function checkPwStrength(){
+    const val = document.getElementById('newPass').value;
+    const hint = document.getElementById('pwStrengthHint');
+    if(val.length === 0){ hint.textContent = 'Use 8+ characters with a mix of letters and numbers.'; hint.style.color = ''; return; }
+    const strong = val.length >= 8 && /[0-9]/.test(val) && /[a-zA-Z]/.test(val);
+    hint.textContent = strong ? 'Strong password.' : 'Password is too weak — add numbers and letters.';
+    hint.style.color = strong ? 'var(--green)' : 'var(--amber)';
+  }
+  function changePassword(){
+    const cur = document.getElementById('curPass').value;
+    const next = document.getElementById('newPass').value;
+    const confirmVal = document.getElementById('confirmPass').value;
+    let ok = true;
+    document.getElementById('fld-current').classList.toggle('has-error', cur.length === 0); if(cur.length===0) ok=false;
+    document.getElementById('fld-new').classList.toggle('has-error', next.length < 8); if(next.length<8) ok=false;
+    document.getElementById('fld-confirm').classList.toggle('has-error', confirmVal !== next || confirmVal.length === 0); if(confirmVal!==next||confirmVal.length===0) ok=false;
+    if(!ok) return;
+    ['curPass','newPass','confirmPass'].forEach(id => document.getElementById(id).value = '');
+    toast('Password updated successfully.', 'success');
+  }
+
+  /* ---------- notification settings ---------- */
+  const NOTIF_SETTINGS_META = [
+    { key:'bookingUpdates', label:'Booking Updates', desc:'Status changes on your repair requests.', on:true },
+    { key:'technicianAssigned', label:'Technician Assigned', desc:'When a technician is assigned to your repair.', on:true },
+    { key:'deliveryUpdates', label:'Delivery Updates', desc:'Pickup and delivery reminders.', on:true },
+    { key:'promotions', label:'Offers & Promotions', desc:'Discounts and seasonal offers.', on:false },
+    { key:'smsAlerts', label:'SMS Alerts', desc:'Receive updates via text message.', on:true },
+    { key:'emailAlerts', label:'Email Alerts', desc:'Receive updates via email.', on:true },
+  ];
+  function renderNotifSettings(){
+    document.getElementById('notifSettingsList').innerHTML = NOTIF_SETTINGS_META.map(m => (
+      '<div class="toggle-row">' +
+        '<div class="toggle-row-text"><b>' + m.label + '</b><span>' + m.desc + '</span></div>' +
+        '<label class="switch">' +
+          '<input type="checkbox" ' + (m.on ? 'checked' : '') + ' onchange="toast(\'Preference saved.\',\'success\')">' +
+          '<span class="switch-track"></span>' +
+        '</label>' +
+      '</div>'
+    )).join('');
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    RP.initShell();
+    renderAddresses();
+    renderNotifSettings();
+    const hash = window.location.hash.replace('#', '');
+    if(['personal','addresses','password','notifications'].includes(hash)) RP.setProfileTab(hash);
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book New Repair — Repair Partner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <script src="app.js"></script>
+
+<div class="dash-shell">
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <span class="logo-mark"><svg width="22" height="22" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+        <text
+            x="50%"
+            y="52%"
+            text-anchor="middle"
+            dominant-baseline="middle"
+            font-family="Poppins, Arial, sans-serif"
+            font-size="53"
+            font-weight="650"
+            letter-spacing="0"
+            fill="#FFFFFF">
+            Rp
+        </text>
+    </svg></span>
+      <span class="sidebar-brand-name">Repair Partner</span>
+      <button class="sidebar-close" aria-label="Close menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-section-label">Menu</div>
+      <a href="dashboard.html" class="sidebar-link" data-page="dashboard.html">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="8" height="8" rx="1.5" stroke-width="1.7"/><rect x="13" y="3" width="8" height="5" rx="1.5" stroke-width="1.7"/><rect x="13" y="12" width="8" height="9" rx="1.5" stroke-width="1.7"/><rect x="3" y="15" width="8" height="6" rx="1.5" stroke-width="1.7"/></svg>
+        Dashboard
+      </a>
+      <a href="my-repairs.html" class="sidebar-link" data-page="my-repairs.html">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M14.7 6.3a4 4 0 00-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 005.4-5.4l-2.3 2.3-2-2 2.3-2.3z" stroke-width="1.7" stroke-linejoin="round"/></svg>
+        My Repairs
+      </a>
+      <a href="book-repair.html" class="sidebar-link" data-page="book-repair.html">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke-width="1.8" stroke-linecap="round"/></svg>
+        Book New Repair
+      </a>
+      <a href="bulk-repair.html" class="sidebar-link" data-page="bulk-repair.html">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="7" height="7" rx="1.4" stroke-width="1.7"/><rect x="14" y="4" width="7" height="7" rx="1.4" stroke-width="1.7"/><rect x="3" y="13" width="7" height="7" rx="1.4" stroke-width="1.7"/><rect x="14" y="13" width="7" height="7" rx="1.4" stroke-width="1.7"/></svg>
+        Bulk Repair Request
+      </a>
+      <div class="sidebar-cta">
+        <p>Need help with an ongoing repair?</p>
+        <a href="contact-support.html" class="btn btn-secondary btn-sm btn-block">Contact Support</a>
+      </div>
+    </nav>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <div class="dash-main">
+    <header class="dash-topbar">
+      <button class="topbar-menu-btn" aria-label="Open menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+      <h1 class="topbar-title">Book New Repair</h1>
+      <div class="topbar-actions">
+        <div class="popover-anchor">
+          <button class="icon-btn" data-popover-trigger="notifPopover" aria-label="Notifications">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M18 8a6 6 0 00-12 0c0 7-3 9-3 9h18s-3-2-3-9" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M13.7 21a2 2 0 01-3.4 0" stroke-width="1.7" stroke-linecap="round"/></svg>
+            <span class="dot" data-notif-dot></span>
+          </button>
+          <div class="popover" id="notifPopover">
+            <div class="popover-head"><h4>Notifications</h4><button class="link-teal" data-notif-mark-all>Mark all read</button></div>
+            <div class="popover-body" data-notif-body></div>
+            <div class="popover-foot"><a href="my-repairs.html" class="link-teal">View all repairs</a></div>
+          </div>
+        </div>
+        <div class="popover-anchor">
+          <button class="icon-btn" data-popover-trigger="userPopover" aria-label="Account menu" style="width:auto;height:auto;border-radius:var(--radius-sm);padding:4px;">
+            <span class="avatar" data-user-initials>AK</span>
+          </button>
+          <div class="popover" id="userPopover" style="width:270px;"></div>
+        </div>
+      </div>
+    </header>
+
+    <main class="dash-content">
+      <div class="wizard-shell">
+
+        <!-- PROGRESS -->
+        <div class="wizard-progress" id="wizardProgress">
+          <div class="wizard-steps">
+            <div class="wizard-step" data-step="1"><div class="wizard-step-circle"><span>1</span></div><span>Category</span></div>
+            <div class="wizard-step" data-step="2"><div class="wizard-step-circle"><span>2</span></div><span>Item</span></div>
+            <div class="wizard-step" data-step="3"><div class="wizard-step-circle"><span>3</span></div><span>Issue</span></div>
+            <div class="wizard-step" data-step="4"><div class="wizard-step-circle"><span>4</span></div><span>Address</span></div>
+            <div class="wizard-step" data-step="5"><div class="wizard-step-circle"><span>5</span></div><span>Time</span></div>
+            <div class="wizard-step" data-step="6"><div class="wizard-step-circle"><span>6</span></div><span>Confirm</span></div>
+          </div>
+        </div>
+
+        <div class="wizard-card" id="wizardCard">
+
+          <!-- STEP 1: CATEGORY -->
+          <div class="wizard-panel active" data-panel="1">
+            <h2>What needs a repair?</h2>
+            <p class="wz-sub">Select a product category to get started.</p>
+            <div class="picker-grid" id="categoryGrid"></div>
+            <div class="wizard-actions">
+              <a href="dashboard.html" class="btn btn-secondary">Back</a>
+              <button class="btn btn-primary" id="btnStep1Next" disabled onclick="goToStep(2)">Next</button>
+            </div>
+          </div>
+
+          <!-- STEP 2: ITEM -->
+          <div class="wizard-panel" data-panel="2">
+            <h2>Select your item</h2>
+            <p class="wz-sub" id="step2Sub">Choose the specific item you'd like repaired.</p>
+            <div class="search-field">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke-width="1.8"/><path d="M21 21l-4.3-4.3" stroke-width="1.8" stroke-linecap="round"/></svg>
+              <input type="text" id="itemSearchInput" placeholder="Search items…" oninput="renderItemGrid(this.value)">
+            </div>
+            <div class="picker-grid" id="itemGrid"></div>
+            <p class="picker-hint" id="itemPickerHint"></p>
+            <div class="field hidden" id="otherItemField" style="margin-top:16px;">
+              <label for="otherItemInput">Please specify the item</label>
+              <input type="text" id="otherItemInput" placeholder="e.g. Sewing Machine" oninput="handleOtherItemInput(this.value)">
+            </div>
+            <div class="wizard-actions">
+              <button class="btn btn-secondary" onclick="goToStep(1)">Back</button>
+              <button class="btn btn-primary" id="btnStep2Next" disabled onclick="goToStep(3)">Next</button>
+            </div>
+          </div>
+
+          <!-- STEP 3: ISSUE + PHOTOS -->
+          <div class="wizard-panel" data-panel="3">
+            <h2>Describe the issue</h2>
+            <p class="wz-sub">Tell us what's wrong — the more detail, the faster our technician can help.</p>
+            <div class="field" id="fld-issue">
+              <label for="issueText">Issue Description</label>
+              <textarea id="issueText" placeholder="e.g. The washing machine makes a loud noise during the spin cycle and doesn't drain water..." oninput="validateStep3()"></textarea>
+              <div class="error-msg">Please describe the issue (at least 10 characters).</div>
+            </div>
+            <div class="field">
+              <label>Upload Photos <span class="opt">(optional, up to 5)</span></label>
+              <div class="dropzone" id="dropzone" onclick="document.getElementById('fileInput').click()">
+                <div class="icon-sq"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 16V4M7 9l5-5 5 5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 16v3a2 2 0 002 2h12a2 2 0 002-2v-3" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+                <h4>Click to upload or drag &amp; drop</h4>
+                <p>PNG or JPG, up to 5MB each</p>
+              </div>
+              <input type="file" id="fileInput" accept="image/*" multiple hidden onchange="handleFiles(this.files)">
+              <div class="upload-previews" id="uploadPreviews"></div>
+              <div class="upload-count" id="uploadCount"></div>
+            </div>
+            <div class="wizard-actions">
+              <button class="btn btn-secondary" onclick="goToStep(2)">Back</button>
+              <button class="btn btn-primary" id="btnStep3Next" disabled onclick="goToStep(4)">Next</button>
+            </div>
+          </div>
+
+          <!-- STEP 4: PICKUP ADDRESS -->
+          <div class="wizard-panel" data-panel="4">
+            <h2>Pickup address</h2>
+            <p class="wz-sub">Where should we collect the item from?</p>
+
+            <div id="savedAddressList" style="margin-bottom:var(--sp-2);"></div>
+            <button class="btn btn-secondary" id="btnToggleNewAddress" onclick="toggleNewAddressForm()" style="margin-bottom:var(--sp-2);">+ Use a New Address</button>
+
+            <div id="newAddressForm" class="new-address-block hidden">
+
+              <div class="section-label">Contact Details</div>
+              <div class="field-row">
+                <div class="field" id="fld-name">
+                  <label for="pName">Full Name</label>
+                  <input id="pName" type="text" placeholder="Your name" oninput="validateStep4()">
+                  <div class="error-msg">Name is required.</div>
+                </div>
+                <div class="field" id="fld-mobile">
+                  <label for="pMobile">Mobile Number</label>
+                  <input id="pMobile" type="tel" placeholder="98765 43210" maxlength="10" oninput="validateStep4()">
+                  <div class="error-msg">Enter a valid 10-digit mobile number.</div>
+                </div>
+              </div>
+              <div class="field" id="fld-altmobile">
+                <label for="pAltMobile">Alternate Number <span class="opt">(optional)</span></label>
+                <input id="pAltMobile" type="tel" placeholder="98765 43210" maxlength="10" oninput="validateStep4()">
+                <div class="error-msg">Enter a valid 10-digit mobile number.</div>
+              </div>
+
+              <div class="section-label">Complete Address</div>
+              <div class="field-row">
+                <div class="field" id="fld-house">
+                  <label for="pHouse">House / Flat No.</label>
+                  <input id="pHouse" type="text" placeholder="e.g. Flat 402, Sunrise Apartments" oninput="validateStep4()">
+                  <div class="error-msg">This field is required.</div>
+                </div>
+                <div class="field" id="fld-street">
+                  <label for="pStreet">Street</label>
+                  <input id="pStreet" type="text" placeholder="e.g. MG Road" oninput="validateStep4()">
+                  <div class="error-msg">This field is required.</div>
+                </div>
+              </div>
+              <div class="field-row">
+                <div class="field" id="fld-area">
+                  <label for="pArea">Area</label>
+                  <input id="pArea" type="text" placeholder="e.g. Kothrud" oninput="validateStep4()">
+                  <div class="error-msg">This field is required.</div>
+                </div>
+                <div class="field">
+                  <label for="pLandmark">Landmark <span class="opt">(optional)</span></label>
+                  <input id="pLandmark" type="text" placeholder="e.g. Near City Mall">
+                </div>
+              </div>
+              <div class="field-row-3">
+                <div class="field" id="fld-city">
+                  <label for="pCity">City</label>
+                  <input id="pCity" type="text" placeholder="e.g. Pune" oninput="validateStep4()">
+                  <div class="error-msg">This field is required.</div>
+                </div>
+                <div class="field" id="fld-state">
+                  <label for="pState">State</label>
+                  <select id="pState" onchange="validateStep4()">
+                    <option value="">Select state</option>
+                  </select>
+                  <div class="error-msg">Please select a state.</div>
+                </div>
+                <div class="field" id="fld-pincode">
+                  <label for="pPincode">Pincode</label>
+                  <input id="pPincode" type="text" inputmode="numeric" maxlength="6" placeholder="e.g. 411038" oninput="validateStep4()">
+                  <div class="error-msg">Enter a valid 6-digit pincode.</div>
+                </div>
+              </div>
+
+              <label class="checkbox-row" style="margin-top:4px;">
+                <input type="checkbox" id="saveAddressChk">
+                Save this address for future repair requests
+              </label>
+            </div>
+
+            <div class="wizard-actions">
+              <button class="btn btn-secondary" onclick="goToStep(3)">Back</button>
+              <button class="btn btn-primary" id="btnStep4Next" disabled onclick="goToStep(5)">Next</button>
+            </div>
+          </div>
+
+          <!-- STEP 5: PREFERRED PICKUP TIME -->
+          <div class="wizard-panel" data-panel="5">
+            <h2>Preferred pickup time</h2>
+            <p class="wz-sub">Select your preferred time slot for pickup.</p>
+
+            <div class="slot-grid" id="slotGrid"></div>
+
+            <div class="notice-box">
+              <div class="notice-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="16" rx="2" stroke-width="1.7"/><path d="M3 10h18M8 3v4M16 3v4" stroke-width="1.7" stroke-linecap="round"/></svg></div>
+              <div>
+                <h4>Pickup within 24-48 hours</h4>
+                <p>Our team will confirm the exact pickup date and time via email.</p>
+              </div>
+            </div>
+
+            <div class="wizard-actions">
+              <button class="btn btn-secondary" onclick="goToStep(4)">Back</button>
+              <button class="btn btn-primary" id="btnStep5Next" disabled onclick="goToStep(6)">Next</button>
+            </div>
+          </div>
+
+          <!-- STEP 6: REVIEW & CONFIRM -->
+          <div class="wizard-panel" data-panel="6">
+            <h2>Review &amp; confirm</h2>
+            <p class="wz-sub">Please double-check the details before submitting your repair request.</p>
+
+            <div class="review-block">
+              <div class="review-block-head"><h4>Product Category &amp; Item</h4><button onclick="goToStep(1)">Edit</button></div>
+              <div class="review-row"><span>Category</span><span id="rvCategory">—</span></div>
+              <div class="review-row"><span>Item</span><span id="rvItem">—</span></div>
+            </div>
+
+            <div class="review-block">
+              <div class="review-block-head"><h4>Issue Details</h4><button onclick="goToStep(3)">Edit</button></div>
+              <div class="review-row"><span>Description</span><span id="rvIssue">—</span></div>
+              <div id="rvPhotosWrap"></div>
+            </div>
+
+            <div class="review-block">
+              <div class="review-block-head"><h4>Pickup Address</h4><button onclick="goToStep(4)">Edit</button></div>
+              <div class="review-row"><span>Name</span><span id="rvName">—</span></div>
+              <div class="review-row"><span>Mobile</span><span id="rvMobile">—</span></div>
+              <div class="review-row" id="rvAltRow"><span>Alternate No.</span><span id="rvAlt">—</span></div>
+              <div class="review-row"><span>Address</span><span id="rvAddress">—</span></div>
+            </div>
+
+            <div class="review-block">
+              <div class="review-block-head"><h4>Pickup Time</h4><button onclick="goToStep(5)">Edit</button></div>
+              <div class="review-row"><span>Preferred slot</span><span id="rvTime">—</span></div>
+            </div>
+
+            <div class="notice-box">
+              <div class="notice-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 4h16v12H7l-3 3V4z" stroke-width="1.7" stroke-linejoin="round"/></svg></div>
+              <div>
+                <h4>What happens next</h4>
+                <p>We will connect with you regarding the issue and the estimated repair cost before any work begins.</p>
+              </div>
+            </div>
+
+            <label class="checkbox-row" style="margin:var(--sp-2) 0 0;">
+              <input type="checkbox" id="agreeTerms" onchange="validateStep6()">
+              I confirm that the information provided above is correct.
+            </label>
+
+            <div class="wizard-actions">
+              <button class="btn btn-secondary" onclick="goToStep(5)">Back</button>
+              <button class="btn btn-primary" id="btnSubmitRepair" disabled onclick="confirmBooking()">Submit Repair Request</button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- SUCCESS -->
+        <div class="success-stage hidden" id="successStage">
+          <div class="success-icon">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="var(--green)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h2>Booking Confirmed!</h2>
+          <p>Your repair request has been submitted successfully. Our technician will contact you shortly to arrange the pickup.</p>
+          <div class="booking-id-chip">
+            <span id="successBookingId">RP-000000</span>
+            <button onclick="copyBookingId()" aria-label="Copy booking ID">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="9" y="9" width="11" height="11" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M5 15V5a2 2 0 012-2h10" stroke="currentColor" stroke-width="1.7"/></svg>
+            </button>
+          </div>
+          <div class="success-actions">
+            <a href="my-repairs.html" class="btn btn-secondary">Track My Repair</a>
+            <button class="btn btn-secondary" onclick="resetWizard()">Book Another Repair</button>
+            <a href="dashboard.html" class="btn btn-primary">Go to Dashboard</a>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+</div>
+
+<script>
+  /* ---------- data (kept exactly as before — presentation only was touched) ---------- */
+  const CATEGORIES = [
+    { id:'kitchen', name:'Kitchen Appliances', desc:'Mixer, oven, cooktop…' },
+    { id:'home', name:'Home Appliances', desc:'Washing machine, AC…' },
+    { id:'audio', name:'Audio Devices', desc:'Speakers, headphones…' },
+    { id:'power-tools', name:'Power Tools', desc:'Drills, saws, grinders…' },
+    { id:'electrical', name:'Electrical Items', desc:'Inverter, wiring…' },
+    { id:'watches', name:'Watches & Clocks', desc:'Wrist, wall, smart…' },
+  ];
+  const ITEMS = {
+    kitchen: ['Mixer Grinder','Microwave Oven','Refrigerator','Induction Cooktop','Water Purifier','Kitchen Chimney','Toaster'],
+    home: ['Washing Machine','Air Conditioner','Vacuum Cleaner','Water Heater / Geyser','Ceiling Fan','Air Cooler'],
+    audio: ['Bluetooth Speaker','Headphones / Earphones','Home Theater System','Soundbar','Amplifier'],
+    'power-tools': ['Drill Machine','Angle Grinder','Circular Saw','Hedge Trimmer','Air Compressor'],
+    electrical: ['Inverter','Voltage Stabilizer','Extension Board','LED Panel / Tube Light','MCB / Switchboard'],
+    watches: ['Wrist Watch','Smart Watch','Wall Clock','Table Clock'],
+  };
+  const CATEGORY_ICONS = {
+    kitchen: '<path d="M6 3v6a3 3 0 006 0V3M9 9v12M17 3v18M15 3v6h4" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>',
+    home: '<rect x="4" y="4" width="16" height="16" rx="2" stroke-width="1.7"/><path d="M4 10h16M10 4v16" stroke-width="1.7"/>',
+    audio: '<rect x="5" y="7" width="14" height="12" rx="2" stroke-width="1.7"/><circle cx="12" cy="13" r="3" stroke-width="1.7"/>',
+    'power-tools': '<path d="M14 3l-9 11h6l-1 7 10-11h-6l1-7z" stroke-width="1.7" stroke-linejoin="round"/>',
+    electrical: '<circle cx="12" cy="12" r="8" stroke-width="1.7"/><path d="M12 8v4l3 2" stroke-width="1.7" stroke-linecap="round"/>',
+    watches: '<circle cx="12" cy="12" r="7" stroke-width="1.7"/><path d="M12 9v3l2 1.5" stroke-width="1.7" stroke-linecap="round"/>',
+  };
+  const ICON_TINT = { kitchen:'sq-gold', home:'sq-blue', audio:'sq-teal', 'power-tools':'sq-red', electrical:'sq-green', watches:'sq-blue' };
+  const STATES = ['Andhra Pradesh','Arunachal Pradesh','Assam','Bihar','Chhattisgarh','Goa','Gujarat','Haryana','Himachal Pradesh','Jharkhand','Karnataka','Kerala','Madhya Pradesh','Maharashtra','Manipur','Meghalaya','Mizoram','Nagaland','Odisha','Punjab','Rajasthan','Sikkim','Tamil Nadu','Telangana','Tripura','Uttar Pradesh','Uttarakhand','West Bengal','Delhi (NCT)','Jammu & Kashmir','Ladakh','Chandigarh','Puducherry'];
+  const SAVED_ADDRESSES = [
+    { id:'a1', label:'Home', isDefault:true, name:'Ananya Kulkarni', mobile:'9876543210', line:'Flat 402, Sunrise Apartments, MG Road, Kothrud, Pune, Maharashtra – 411038' },
+    { id:'a2', label:'Office', isDefault:false, name:'Ananya Kulkarni', mobile:'9876543210', line:'3rd Floor, Tech Park B, Baner Road, Baner, Pune, Maharashtra – 411045' },
+  ];
+  const ITEM_PAGE_SIZE = 6; // "Book New Repair": show only the first 6 items by default — searching reveals the rest.
+  const TIME_SLOTS = [
+    { id:'morning', name:'Morning', range:'9:00 AM - 12:00 PM' },
+    { id:'afternoon', name:'Afternoon', range:'12:00 PM - 3:00 PM' },
+    { id:'evening', name:'Evening', range:'3:00 PM - 6:00 PM' },
+  ];
+
+  function svgIcon(catId){ return '<svg width="20" height="20" viewBox="0 0 24 24" fill="none">' + (CATEGORY_ICONS[catId] || CATEGORY_ICONS.home) + '</svg>'; }
+  function fmtISODate(ts){ return new Date(ts).toISOString().slice(0, 10); }
+
+  /* ---------- state ---------- */
+  const state = {
+    category:null, categoryName:null,
+    item:null, isOther:false, otherText:'',
+    issue:'', images:[],
+    addressMode:'saved', selectedAddressId:null,
+    name:'', mobile:'', altMobile:'', house:'', street:'', area:'', landmark:'', city:'', stateVal:'', pincode:'',
+    saveAddress:false,
+    pickupSlot:null, pickupSlotLabel:'',
+  };
+  let currentStep = 1;
+
+  /* ---------- step 1: category ---------- */
+  function renderCategoryGrid(){
+    document.getElementById('categoryGrid').innerHTML = CATEGORIES.map(c => (
+      '<button type="button" class="picker-card ' + (state.category === c.id ? 'selected' : '') + '" onclick="selectCategory(\'' + c.id + '\',\'' + c.name.replace(/'/g,"\\'") + '\')">' +
+        '<div class="check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>' +
+        '<div class="icon-sq ' + ICON_TINT[c.id] + '">' + svgIcon(c.id) + '</div>' +
+        '<h4>' + c.name + '</h4><p>' + c.desc + '</p>' +
+      '</button>'
+    )).join('');
+  }
+  function selectCategory(id, name){
+    state.category = id; state.categoryName = name;
+    state.item = null; state.isOther = false; state.otherText = '';
+    renderCategoryGrid();
+    document.getElementById('btnStep1Next').disabled = false;
+    document.getElementById('step2Sub').textContent = 'Choose the specific ' + name.toLowerCase() + ' item you\'d like repaired.';
+  }
+
+  /* ---------- step 2: item ---------- */
+  function renderItemGrid(filterText){
+    const grid = document.getElementById('itemGrid');
+    const hint = document.getElementById('itemPickerHint');
+    if(!state.category){ grid.innerHTML=''; hint.innerHTML=''; return; }
+
+    const all = ITEMS[state.category] || [];
+    const searching = !!filterText;
+    let items = all;
+    if(searching){
+      const f = filterText.toLowerCase();
+      items = all.filter(i => i.toLowerCase().includes(f));
+    } else if(all.length > ITEM_PAGE_SIZE){
+      items = all.slice(0, ITEM_PAGE_SIZE);
+    }
+
+    let html = items.map(item => (
+      '<button type="button" class="picker-card ' + (!state.isOther && state.item === item ? 'selected' : '') + '" onclick="selectItem(\'' + item.replace(/'/g,"\\'") + '\')">' +
+        '<div class="check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>' +
+        '<div class="icon-sq ' + ICON_TINT[state.category] + '">' + svgIcon(state.category) + '</div>' +
+        '<h4>' + item + '</h4><p>Tap to select</p>' +
+      '</button>'
+    )).join('');
+    html += '<button type="button" class="picker-card other-card ' + (state.isOther ? 'selected' : '') + '" onclick="selectOther()">' +
+        '<div class="check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>' +
+        '<div class="icon-sq"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke-width="1.8" stroke-linecap="round"/></svg></div>' +
+        '<h4>Other</h4><p>Not listed above</p>' +
+      '</button>';
+
+    if(items.length === 0 && searching){
+      grid.innerHTML = '<p class="picker-empty" style="grid-column:1/-1;">No items match “' + filterText + '”. Try a different search, or pick “Other” below.</p>' + html;
+    } else {
+      grid.innerHTML = html;
+    }
+
+    if(!searching && all.length > ITEM_PAGE_SIZE){
+      hint.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>' +
+        'Showing ' + ITEM_PAGE_SIZE + ' of ' + all.length + ' items — search above to see the rest.';
+    } else if(searching){
+      hint.innerHTML = items.length + ' item' + (items.length === 1 ? '' : 's') + ' match your search.';
+    } else {
+      hint.innerHTML = '';
+    }
+
+    document.getElementById('otherItemField').classList.toggle('hidden', !state.isOther);
+  }
+  function selectItem(item){
+    state.item = item; state.isOther = false; state.otherText = '';
+    renderItemGrid(document.getElementById('itemSearchInput').value);
+    document.getElementById('btnStep2Next').disabled = false;
+  }
+  function selectOther(){
+    state.isOther = true; state.item = null;
+    renderItemGrid(document.getElementById('itemSearchInput').value);
+    document.getElementById('btnStep2Next').disabled = state.otherText.trim().length < 2;
+    setTimeout(() => document.getElementById('otherItemInput').focus(), 50);
+  }
+  function handleOtherItemInput(val){
+    state.otherText = val;
+    document.getElementById('btnStep2Next').disabled = val.trim().length < 2;
+  }
+
+  /* ---------- step 3: issue + photos ---------- */
+  function validateStep3(){
+    const val = document.getElementById('issueText').value.trim();
+    state.issue = val;
+    const ok = val.length >= 10;
+    document.getElementById('fld-issue').classList.toggle('has-error', val.length > 0 && !ok);
+    document.getElementById('btnStep3Next').disabled = !ok;
+  }
+  function handleFiles(fileList){
+    const remaining = 5 - state.images.length;
+    if(remaining <= 0){ toast('You can upload up to 5 photos.'); return; }
+    const files = Array.from(fileList).slice(0, remaining);
+    files.forEach(file => {
+      if(!file.type.startsWith('image/')) return;
+      if(file.size > 5*1024*1024){ toast(file.name + ' is over 5MB.'); return; }
+      const reader = new FileReader();
+      reader.onload = e => { state.images.push({ name:file.name, dataUrl:e.target.result }); renderPreviews(); };
+      reader.readAsDataURL(file);
+    });
+  }
+  function renderPreviews(){
+    document.getElementById('uploadPreviews').innerHTML = state.images.map((img,i) => (
+      '<div class="upload-thumb"><img src="' + img.dataUrl + '" alt="' + img.name + '"><button class="remove" onclick="removeImage(' + i + ')" aria-label="Remove image">✕</button></div>'
+    )).join('');
+    document.getElementById('uploadCount').textContent = state.images.length + ' of 5 photos added';
+    document.getElementById('dropzone').style.opacity = state.images.length >= 5 ? .5 : 1;
+    document.getElementById('dropzone').style.pointerEvents = state.images.length >= 5 ? 'none' : 'auto';
+  }
+  function removeImage(i){ state.images.splice(i,1); renderPreviews(); }
+  document.addEventListener('DOMContentLoaded', () => {
+    const zone = document.getElementById('dropzone');
+    ['dragover','dragenter'].forEach(evt => zone.addEventListener(evt, e => { e.preventDefault(); zone.classList.add('drag-over'); }));
+    ['dragleave','drop'].forEach(evt => zone.addEventListener(evt, e => { e.preventDefault(); zone.classList.remove('drag-over'); }));
+    zone.addEventListener('drop', e => { if(e.dataTransfer.files.length) handleFiles(e.dataTransfer.files); });
+  });
+
+  /* ---------- step 4: address ---------- */
+  function renderSavedAddresses(){
+    const wrap = document.getElementById('savedAddressList');
+    wrap.innerHTML = SAVED_ADDRESSES.map(a => (
+      '<div class="address-card ' + (state.addressMode === 'saved' && state.selectedAddressId === a.id ? 'selected' : '') + '" onclick="selectSavedAddress(\'' + a.id + '\')">' +
+        '<div class="radio-dot"></div>' +
+        '<h4>' + a.label + (a.isDefault ? ' <span class="badge badge-teal" style="margin-left:4px;">Default</span>' : '') + '</h4>' +
+        '<p>' + a.name + ' · ' + a.mobile + '<br>' + a.line + '</p>' +
+      '</div>'
+    )).join('');
+  }
+  function selectSavedAddress(id){
+    const addr = SAVED_ADDRESSES.find(a => a.id === id);
+    state.addressMode = 'saved'; state.selectedAddressId = id;
+    state.name = addr.name; state.mobile = addr.mobile; state.address = addr.line;
+    document.getElementById('newAddressForm').classList.add('hidden');
+    document.getElementById('btnToggleNewAddress').textContent = '+ Use a New Address';
+    renderSavedAddresses();
+    validateStep4();
+  }
+  function toggleNewAddressForm(){
+    const form = document.getElementById('newAddressForm');
+    const willShow = form.classList.contains('hidden');
+    form.classList.toggle('hidden');
+    document.getElementById('btnToggleNewAddress').textContent = willShow ? 'Use a Saved Address Instead' : '+ Use a New Address';
+    if(willShow){
+      state.addressMode = 'new'; state.selectedAddressId = null;
+      renderSavedAddresses();
+      validateStep4();
+    } else {
+      selectSavedAddress(SAVED_ADDRESSES.find(a=>a.isDefault).id);
+    }
+  }
+  function populateStateOptions(){
+    const sel = document.getElementById('pState');
+    STATES.forEach(s => { const o = document.createElement('option'); o.value = s; o.textContent = s; sel.appendChild(o); });
+  }
+  function validateStep4(){
+    let ok;
+    if(state.addressMode === 'new'){
+      const name = document.getElementById('pName').value.trim();
+      const mobile = document.getElementById('pMobile').value.trim();
+      const altMobile = document.getElementById('pAltMobile').value.trim();
+      const house = document.getElementById('pHouse').value.trim();
+      const street = document.getElementById('pStreet').value.trim();
+      const area = document.getElementById('pArea').value.trim();
+      const landmark = document.getElementById('pLandmark').value.trim();
+      const city = document.getElementById('pCity').value.trim();
+      const stateVal = document.getElementById('pState').value;
+      const pincode = document.getElementById('pPincode').value.trim();
+      Object.assign(state, { name, mobile, altMobile, house, street, area, landmark, city, stateVal, pincode });
+      state.saveAddress = document.getElementById('saveAddressChk').checked;
+
+      const mobileOk = /^\d{10}$/.test(mobile);
+      const altOk = altMobile.length === 0 || /^\d{10}$/.test(altMobile);
+      const pinOk = /^\d{6}$/.test(pincode);
+
+      toggleErr('fld-name', wasTouched('pName') && name.length === 0);
+      toggleErr('fld-mobile', mobile.length > 0 && !mobileOk);
+      toggleErr('fld-altmobile', altMobile.length > 0 && !altOk);
+      toggleErr('fld-house', wasTouched('pHouse') && house.length === 0);
+      toggleErr('fld-street', wasTouched('pStreet') && street.length === 0);
+      toggleErr('fld-area', wasTouched('pArea') && area.length === 0);
+      toggleErr('fld-city', wasTouched('pCity') && city.length === 0);
+      toggleErr('fld-pincode', pincode.length > 0 && !pinOk);
+
+      ok = name.length > 1 && mobileOk && altOk && house.length > 0 && street.length > 0 && area.length > 0 && city.length > 0 && !!stateVal && pinOk;
+    } else {
+      ok = !!state.selectedAddressId;
+    }
+    document.getElementById('btnStep4Next').disabled = !ok;
+  }
+  const touched = {};
+  function wasTouched(id){ return !!touched[id]; }
+  document.addEventListener('DOMContentLoaded', () => {
+    ['pName','pHouse','pStreet','pArea','pCity'].forEach(id => {
+      const el = document.getElementById(id);
+      if(el) el.addEventListener('blur', () => { touched[id] = true; validateStep4(); });
+    });
+  });
+  function toggleErr(fieldId, isErr){ document.getElementById(fieldId).classList.toggle('has-error', !!isErr); }
+
+  function buildFullAddress(){
+    if(state.addressMode === 'saved'){ return state.address || '—'; }
+    const parts = [state.house, state.street, state.area];
+    if(state.landmark) parts.push('near ' + state.landmark);
+    parts.push(state.city, state.stateVal, '– ' + state.pincode);
+    return parts.filter(Boolean).join(', ');
+  }
+
+  /* ---------- step 5: preferred pickup time ---------- */
+  function slotIcon(){
+    return '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke-width="1.7"/><path d="M12 7v5l3.5 2" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  }
+  function renderTimeSlots(){
+    document.getElementById('slotGrid').innerHTML = TIME_SLOTS.map(s => (
+      '<button type="button" class="slot-card ' + (state.pickupSlot === s.id ? 'selected' : '') + '" onclick="selectTimeSlot(\'' + s.id + '\')">' +
+        '<div class="slot-icon">' + slotIcon() + '</div>' +
+        '<h4>' + s.name + '</h4><p>' + s.range + '</p>' +
+      '</button>'
+    )).join('');
+  }
+  function selectTimeSlot(id){
+    const slot = TIME_SLOTS.find(s => s.id === id);
+    if(!slot) return;
+    state.pickupSlot = slot.id;
+    // Stored/displayed as "Morning · 9:00 AM – 12:00 PM" to match the time-range
+    // format ("9:00 AM – 12:00 PM") already used for pickupSlot across the app.
+    state.pickupSlotLabel = slot.name + ' · ' + slot.range.replace(' - ', ' – ');
+    renderTimeSlots();
+    document.getElementById('btnStep5Next').disabled = false;
+  }
+
+  /* ---------- step 6: review + submit ---------- */
+  function validateStep6(){
+    document.getElementById('btnSubmitRepair').disabled = !document.getElementById('agreeTerms').checked;
+  }
+  function populateReview(){
+    document.getElementById('rvCategory').textContent = state.categoryName || '—';
+    document.getElementById('rvItem').textContent = state.isOther ? (state.otherText + ' (Other)') : (state.item || '—');
+    document.getElementById('rvIssue').textContent = state.issue || '—';
+
+    const photosWrap = document.getElementById('rvPhotosWrap');
+    if(state.images.length){
+      photosWrap.innerHTML = '<div class="review-row"><span>Photos attached</span><span>' + state.images.length + ' of 5</span></div>' +
+        '<div class="review-photos">' + state.images.map(i => '<img src="'+i.dataUrl+'" alt="'+i.name+'">').join('') + '</div>';
+    } else {
+      photosWrap.innerHTML = '<div class="review-row"><span>Photos attached</span><span>0</span></div><div class="review-empty-photos">No photos uploaded.</div>';
+    }
+
+    document.getElementById('rvName').textContent = state.name || '—';
+    document.getElementById('rvMobile').textContent = state.mobile || '—';
+    if(state.addressMode === 'new' && state.altMobile){
+      document.getElementById('rvAlt').textContent = state.altMobile;
+      document.getElementById('rvAltRow').style.display = 'flex';
+    } else {
+      document.getElementById('rvAltRow').style.display = 'none';
+    }
+    document.getElementById('rvAddress').textContent = buildFullAddress();
+    document.getElementById('rvTime').textContent = state.pickupSlotLabel || '—';
+  }
+
+  function goToStep(n){
+    currentStep = n;
+    document.querySelectorAll('.wizard-panel').forEach(p => p.classList.toggle('active', +p.dataset.panel === n));
+    document.querySelectorAll('.wizard-step').forEach(s => {
+      const step = +s.dataset.step;
+      s.classList.toggle('active', step === n);
+      s.classList.toggle('done', step < n);
+    });
+    if(n === 5) renderTimeSlots();
+    if(n === 6) populateReview();
+    window.scrollTo({ top:0, behavior:'smooth' });
+  }
+
+  function confirmBooking(){
+    const btn = document.getElementById('btnSubmitRepair');
+    btn.classList.add('is-loading');
+    setTimeout(() => {
+      const bookingId = RP.newBookingId();
+      const itemName = state.isOther ? state.otherText : state.item;
+
+      // Persist through the same shared data store the rest of the app reads
+      // from, so a new booking actually shows up on the Dashboard and in
+      // My Repairs instead of vanishing once this page is left.
+      RP.addRepair({
+        id: bookingId,
+        category: state.category,
+        categoryName: state.categoryName,
+        item: itemName,
+        brand: '',
+        issue: state.issue,
+        status: 'Submitted',
+        createdAt: Date.now(),
+        pickupDate: fmtISODate(Date.now() + 86400000),
+        pickupSlot: state.pickupSlotLabel || null,
+        address: buildFullAddress(),
+        estimatedCost: undefined,
+        technicianNotes: '',
+        images: state.images.map(i => i.dataUrl),
+        timeline: RP.statusFlow.map((label, i) => (
+          i === 0 ? { label, state:'done', at: Date.now() } : { label, state:'pending', at:null }
+        )),
+      });
+      RP.addNotification({
+        icon: 'wrench',
+        text: itemName + ' repair (' + bookingId + ') has been submitted.',
+      });
+
+      document.getElementById('successBookingId').textContent = bookingId;
+      document.getElementById('wizardProgress').classList.add('hidden');
+      document.getElementById('wizardCard').classList.add('hidden');
+      document.getElementById('successStage').classList.remove('hidden');
+      btn.classList.remove('is-loading');
+      toast('Booking confirmed — ' + bookingId, 'success');
+      window.scrollTo({ top:0, behavior:'smooth' });
+    }, 900);
+  }
+  function copyBookingId(){
+    const id = document.getElementById('successBookingId').textContent;
+    if(navigator.clipboard) navigator.clipboard.writeText(id);
+    toast('Booking ID copied to clipboard.', 'success');
+  }
+  function resetWizard(){
+    Object.assign(state, {
+      category:null, categoryName:null, item:null, isOther:false, otherText:'',
+      issue:'', images:[], addressMode:'saved', selectedAddressId:null,
+      name:'', mobile:'', altMobile:'', house:'', street:'', area:'', landmark:'', city:'', stateVal:'', pincode:'', saveAddress:false,
+      pickupSlot:null, pickupSlotLabel:'',
+    });
+    document.getElementById('issueText').value = '';
+    document.getElementById('otherItemInput').value = '';
+    document.getElementById('itemSearchInput').value = '';
+    document.getElementById('agreeTerms').checked = false;
+    document.getElementById('successStage').classList.add('hidden');
+    document.getElementById('wizardProgress').classList.remove('hidden');
+    document.getElementById('wizardCard').classList.remove('hidden');
+    renderCategoryGrid(); renderItemGrid(''); renderPreviews(); renderTimeSlots();
+    document.getElementById('btnStep1Next').disabled = true;
+    document.getElementById('btnStep2Next').disabled = true;
+    document.getElementById('btnStep3Next').disabled = true;
+    document.getElementById('btnStep4Next').disabled = true;
+    document.getElementById('btnStep5Next').disabled = true;
+    document.getElementById('btnSubmitRepair').disabled = true;
+    const defaultAddr = SAVED_ADDRESSES.find(a => a.isDefault);
+    selectSavedAddress(defaultAddr.id);
+    goToStep(1);
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    RP.initShell();
+    renderCategoryGrid();
+    populateStateOptions();
+    renderSavedAddresses();
+    selectSavedAddress(SAVED_ADDRESSES.find(a => a.isDefault).id);
+    renderPreviews();
+    renderTimeSlots();
+    goToStep(1);
+  });
+</script>
+</body>
+</html>
