@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — Repair Partner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="dash-shell">
+
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <span class="logo-mark"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M14 3L4 14h6l-1 7 10-11h-6l1-7z"/></svg></span>
+      <span class="sidebar-brand-name">Repair Partner</span>
+      <button class="sidebar-close" aria-label="Close menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="sidebar-section-label">Menu</div>
+      <a href="dashboard.html" class="sidebar-link" data-page="dashboard.html">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="8" height="8" rx="1.5" stroke-width="1.7"/><rect x="13" y="3" width="8" height="5" rx="1.5" stroke-width="1.7"/><rect x="13" y="12" width="8" height="9" rx="1.5" stroke-width="1.7"/><rect x="3" y="15" width="8" height="6" rx="1.5" stroke-width="1.7"/></svg>
+        Dashboard
+      </a>
+      <a href="my-repairs.html" class="sidebar-link" data-page="my-repairs.html">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M14.7 6.3a4 4 0 00-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 005.4-5.4l-2.3 2.3-2-2 2.3-2.3z" stroke-width="1.7" stroke-linejoin="round"/></svg>
+        My Repairs
+      </a>
+      <a href="book-repair.html" class="sidebar-link" data-page="book-repair.html">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke-width="1.8" stroke-linecap="round"/></svg>
+        Book New Repair
+      </a>
+      
+      <a href="bulk-repair.html" class="sidebar-link" data-page="bulk-repair.html">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="7" height="7" rx="1.4" stroke-width="1.7"/><rect x="14" y="4" width="7" height="7" rx="1.4" stroke-width="1.7"/><rect x="3" y="13" width="7" height="7" rx="1.4" stroke-width="1.7"/><rect x="14" y="13" width="7" height="7" rx="1.4" stroke-width="1.7"/></svg>
+        Bulk Repair Request
+      </a>
+
+      <div class="sidebar-cta">
+        <p>Need help with an ongoing repair?</p>
+        <a href="contact-support.html" class="btn btn-secondary btn-sm btn-block">Contact Support</a>
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- ============ MAIN ============ -->
+  <div class="dash-main">
+
+    <!-- TOPBAR -->
+    <header class="dash-topbar">
+      <button class="topbar-menu-btn" aria-label="Open menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+      <h1 class="topbar-title">Dashboard</h1>
+
+      <div class="topbar-search">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke-width="1.8"/><path d="M21 21l-4.3-4.3" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <input type="text" placeholder="Search by Booking ID…" onkeydown="if(event.key==='Enter'){window.location.href='my-repairs.html?q='+encodeURIComponent(this.value)}">
+      </div>
+
+      <div class="topbar-actions">
+        <div class="popover-anchor">
+          <button class="icon-btn" data-popover-trigger="notifPopover" aria-label="Notifications">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M18 8a6 6 0 00-12 0c0 7-3 9-3 9h18s-3-2-3-9" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M13.7 21a2 2 0 01-3.4 0" stroke-width="1.7" stroke-linecap="round"/></svg>
+            <span class="dot" data-notif-dot></span>
+          </button>
+          <div class="popover" id="notifPopover">
+            <div class="popover-head">
+              <h4>Notifications</h4>
+              <button class="link-teal" data-notif-mark-all>Mark all read</button>
+            </div>
+            <div class="popover-body" data-notif-body></div>
+            <div class="popover-foot"><a href="my-repairs.html" class="link-teal">View all repairs</a></div>
+          </div>
+        </div>
+
+        <div class="popover-anchor">
+          <button class="icon-btn" data-popover-trigger="userPopover" aria-label="Account menu" style="width:auto;height:auto;border-radius:var(--radius-sm);padding:4px;">
+            <span class="avatar" data-user-initials>AK</span>
+          </button>
+          <!-- Filled by RP.renderAccountPopover() so every page shows the exact same profile menu as the Profile page. -->
+          <div class="popover" id="userPopover" style="width:270px;"></div>
+        </div>
+      </div>
+    </header>
+
+    <!-- CONTENT -->
+    <main class="dash-content">
+
+      <div class="welcome-banner">
+        <div class="welcome-text">
+          <h1>Welcome back, <span data-user-first-name>Ananya</span> 👋</h1>
+          <p>Here's what's happening with your repairs today.</p>
+        </div>
+      </div>
+
+      <div class="cta-tiles">
+        <a href="book-repair.html" class="cta-tile tile-primary">
+          <div class="icon-sq"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+          <div>
+            <h4>Book New Repair</h4>
+            <p>Schedule a doorstep pickup in under a minute.</p>
+          </div>
+          <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="var(--teal)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="bulk-repair.html" class="cta-tile">
+          <div class="icon-sq sq-violet"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="7" height="7" rx="1.4" stroke-width="1.7"/><rect x="14" y="4" width="7" height="7" rx="1.4" stroke-width="1.7"/><rect x="3" y="13" width="7" height="7" rx="1.4" stroke-width="1.7"/><rect x="14" y="13" width="7" height="7" rx="1.4" stroke-width="1.7"/></svg></div>
+          <div>
+            <h4>Bulk Repair Request</h4>
+            <p>Running a business? Get scheduled pickups at scale.</p>
+          </div>
+          <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="var(--ink-soft)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <div class="stats-grid" id="statsGrid"></div>
+
+      <div class="content-grid">
+        <div>
+          <div class="card card-pad-lg" style="margin-bottom:var(--sp-3);">
+            <div class="section-card-head">
+              <h3>Recent Repairs</h3>
+              <a href="my-repairs.html">View all</a>
+            </div>
+            <div id="recentRepairsList"><!-- injected --></div>
+          </div>
+
+        </div>
+
+        <div>
+          <div class="card card-pad-lg notif-list-card">
+            <div class="section-card-head">
+              <h3>Notifications</h3>
+              <button class="link-teal" data-notif-mark-all>Mark all read</button>
+            </div>
+            <div id="dashNotifList"><!-- injected --></div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<script src="app.js"></script>
+<script>
+  function repairIcon(catId){
+    const map = {
+      kitchen: '<path d="M6 3v6a3 3 0 006 0V3M9 9v12M17 3v18M15 3v6h4" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>',
+      home: '<rect x="4" y="4" width="16" height="16" rx="2" stroke-width="1.7"/><path d="M4 10h16M10 4v16" stroke-width="1.7"/>',
+      audio: '<rect x="5" y="7" width="14" height="12" rx="2" stroke-width="1.7"/><circle cx="12" cy="13" r="3" stroke-width="1.7"/>',
+      'power-tools': '<path d="M14 3l-9 11h6l-1 7 10-11h-6l1-7z" stroke-width="1.7" stroke-linejoin="round"/>',
+      electrical: '<circle cx="12" cy="12" r="8" stroke-width="1.7"/><path d="M12 8v4l3 2" stroke-width="1.7" stroke-linecap="round"/>',
+      watches: '<circle cx="12" cy="12" r="7" stroke-width="1.7"/><path d="M12 9v3l2 1.5" stroke-width="1.7" stroke-linecap="round"/>',
+    };
+    return '<svg width="20" height="20" viewBox="0 0 24 24" fill="none">' + (map[catId] || map.home) + '</svg>';
+  }
+
+  function renderStats(){
+    const repairs = RP.getRepairs();
+    const active = repairs.filter(r => RP.isActiveStatus(r.status)).length;
+    const completed = repairs.filter(r => r.status === 'Delivered').length;
+    const totalSpend = repairs.filter(r => r.status === 'Delivered').reduce((s,r) => s + (r.estimatedCost||0), 0);
+    const cancelled = repairs.filter(r => r.status === 'Cancelled').length;
+
+    const stats = [
+      { label: 'Active Repairs', value: active, icon: 'sq-blue', trend: active > 0 ? 'In progress' : 'None right now', svg: '<circle cx="12" cy="12" r="9" stroke-width="1.7"/><path d="M12 7v5l3 3" stroke-width="1.7" stroke-linecap="round"/>' },
+      { label: 'Completed Repairs', value: completed, icon: 'sq-green', trend: 'All time', svg: '<circle cx="12" cy="12" r="9" stroke-width="1.7"/><path d="M8 12.5l2.5 2.5L16 9.5" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>' },
+      { label: 'Total Spend', value: RP.formatMoney(totalSpend), icon: 'sq-gold', trend: 'On completed repairs', svg: '<path d="M12 2v20M17 6.5c0-1.9-2.2-3-5-3s-5 1.1-5 3 2.2 3 5 3 5 1.1 5 3-2.2 3-5 3-5-1.1-5-3" stroke-width="1.6" stroke-linecap="round"/>' },
+      { label: 'Cancelled', value: cancelled, icon: 'sq-red', trend: 'This year', svg: '<circle cx="12" cy="12" r="9" stroke-width="1.7"/><path d="M9 9l6 6M15 9l-6 6" stroke-width="1.7" stroke-linecap="round"/>' },
+    ];
+
+    // document.getElementById('statsGrid').innerHTML = stats.map(s => (
+    //   '<div class="stat-card">' +
+    //     '<div class="stat-card-top">' +
+    //       '<div class="icon-sq ' + s.icon + '"><svg width="20" height="20" viewBox="0 0 24 24" fill="none">' + s.svg + '</svg></div>' +
+    //     '</div>' +
+    //     '<div class="stat-value">' + s.value + '</div>' +
+    //     '<div class="stat-label">' + s.label + '</div>' +
+    //   '</div>'
+    // )).join('');
+  }
+
+  function renderRecentRepairs(){
+    const repairs = RP.getRepairs().slice(0, 4);
+    const el = document.getElementById('recentRepairsList');
+    if(repairs.length === 0){
+      el.innerHTML = '<div class="empty-state"><div class="icon-sq"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M14.7 6.3a4 4 0 00-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 005.4-5.4l-2.3 2.3-2-2 2.3-2.3z" stroke-width="1.7" stroke-linejoin="round"/></svg></div><h4>No repairs yet</h4><p>Once you book a repair, it will show up here.</p><a href="book-repair.html" class="btn btn-primary btn-sm">Book Your First Repair</a></div>';
+      return;
+    }
+    el.innerHTML = repairs.map(r => (
+      '<div class="repair-row">' +
+        '<div class="repair-row-icon">' + repairIcon(r.category) + '</div>' +
+        '<div class="repair-row-main">' +
+          '<b>' + r.item + '</b>' +
+          '<span>' + r.id + ' · ' + RP.formatDate(r.createdAt) + '</span>' +
+        '</div>' +
+        '<div class="repair-row-right">' +
+          RP.statusBadgeHTML(r.status) +
+          '<a href="repair-details.html?id=' + r.id + '" class="link-teal" style="font-size:12.5px;">View Details</a>' +
+        '</div>' +
+      '</div>'
+    )).join('');
+  }
+
+  function renderDashNotifs(){
+    const list = RP.getNotifications().slice(0, 5);
+    const el = document.getElementById('dashNotifList');
+    if(list.length === 0){
+      el.innerHTML = '<div class="empty-state"><p>No notifications yet.</p></div>';
+      return;
+    }
+    el.innerHTML = list.map(n => (
+      '<div class="notif-item ' + (n.read ? '' : 'unread') + '">' +
+        '<div class="notif-dot-icon">' + (window.RP && document.querySelector ? '' : '') +
+        (function(){ const icons={wrench:'<path d="M14.7 6.3a4 4 0 00-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 005.4-5.4l-2.3 2.3-2-2 2.3-2.3z" stroke-width="1.6" stroke-linejoin="round"/>',truck:'<rect x="2" y="7" width="12" height="9" rx="1" stroke-width="1.6"/><path d="M14 10h4l3 3v3h-7z" stroke-width="1.6" stroke-linejoin="round"/><circle cx="7" cy="18" r="1.6" stroke-width="1.6"/><circle cx="17" cy="18" r="1.6" stroke-width="1.6"/>',check:'<circle cx="12" cy="12" r="9" stroke-width="1.6"/><path d="M8 12.5l2.5 2.5L16 9.5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>',calendar:'<rect x="3" y="5" width="18" height="16" rx="2" stroke-width="1.6"/><path d="M3 10h18M8 3v4M16 3v4" stroke-width="1.6" stroke-linecap="round"/>',tag:'<path d="M20 12l-8 8-9-9V4h7l10 8z" stroke-width="1.6" stroke-linejoin="round"/><circle cx="7.5" cy="7.5" r="1.4" stroke-width="1.6"/>'}; return '<svg width="16" height="16" viewBox="0 0 24 24" fill="none">'+(icons[n.icon]||icons.check)+'</svg>'; })() +
+        '</div>' +
+        '<div class="notif-text"><p>' + n.text + '</p><span>' + RP.timeAgo(n.at) + '</span></div>' +
+      '</div>'
+    )).join('');
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    RP.initShell();
+    const user = RP.getUser();
+    document.querySelectorAll('[data-user-first-name]').forEach(el => el.textContent = user.name.split(' ')[0]);
+    renderStats();
+    renderRecentRepairs();
+    renderDashNotifs();
+
+    document.querySelector('[data-notif-mark-all]:not([data-notif-mark-all] ~ *)');
+    document.querySelectorAll('[data-notif-mark-all]').forEach(btn => btn.addEventListener('click', function(){
+      renderDashNotifs();
+    }));
+  });
+</script>
+</body>
+</html>
