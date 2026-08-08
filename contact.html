@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us — Repair Partner</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#009999">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --teal:#009999;
+  --teal-dark:#007a7a;
+  --teal-tint:#E4F5F5;
+  --ink:#14201F;
+  --ink-soft:#54615F;
+  --border:#E3E9E8;
+  --bg-alt:#F7FAF9;
+  --white:#FFFFFF;
+  --gold:#F3A712;
+
+  --radius-card:16px;
+  --radius-btn:10px;
+  --sp-1:8px; --sp-2:16px; --sp-3:24px; --sp-4:32px; --sp-5:40px; --sp-6:48px; --sp-8:64px; --sp-10:80px;
+  --container:1180px;
+}
+*{ margin:0; padding:0; box-sizing:border-box; }
+body{ font-family:'Inter', sans-serif; color:var(--ink); background:var(--white); line-height:1.6; -webkit-font-smoothing:antialiased; }
+h1,h2,h3,h4{ font-family:'Poppins', sans-serif; font-weight:700; color:var(--ink); letter-spacing:-0.01em; }
+a{ text-decoration:none; color:inherit; }
+ul{ list-style:none; }
+img,svg{ display:block; }
+button{ font-family:inherit; cursor:pointer; }
+
+.wrap{ max-width:var(--container); margin:0 auto; padding:0 var(--sp-3); }
+section{ padding:var(--sp-8) 0; }
+
+.btn{ display:inline-flex; align-items:center; justify-content:center; gap:8px; font-weight:600; font-size:15px; padding:13px 26px; border-radius:var(--radius-btn); transition:all .18s ease; border:1.5px solid transparent; white-space:nowrap; }
+.btn:hover{ transform:translateY(-2px); }
+.btn:active{ transform:translateY(0); }
+.btn-light{ background:var(--white); color:var(--ink); }
+.btn-light:hover{ background:#EFF3F2; }
+.btn-primary{ background:var(--teal); color:var(--white); width:100%; }
+.btn-primary:hover{ background:var(--teal-dark); }
+
+/* Navbar (shared) */
+.navbar{ background:var(--teal); }
+.nav-inner{ max-width:var(--container); margin:0 auto; padding:0 var(--sp-3); height:72px; display:flex; align-items:center; justify-content:space-between; }
+.logo{ display:flex; align-items:center; gap:8px; font-family:'Poppins',sans-serif; font-weight:700; font-size:19px; color:var(--white); }
+.logo-mark{ width:30px; height:30px; border-radius:8px; background:var(--white); display:flex; align-items:center; justify-content:center; }
+.nav-links{ display:flex; gap:var(--sp-4); }
+.nav-links a{ position:relative; color:rgba(255,255,255,0.9); font-size:15px; font-weight:500; padding:4px 0; transition:color .2s ease; }
+.nav-links a::after{ content:''; position:absolute; left:0; bottom:-4px; width:0; height:2px; background:var(--white); border-radius:2px; transition:width .25s ease; }
+.nav-links a:hover, .nav-links a.active{ color:var(--white); }
+.nav-links a:hover::after, .nav-links a.active::after{ width:100%; }
+.nav-actions{ display:flex; align-items:center; gap:var(--sp-2); }
+.nav-actions .signin{ position:relative; color:rgba(255,255,255,0.9); font-size:15px; font-weight:500; transition:color .2s ease; }
+.nav-actions .signin:hover{ color:var(--white); }
+.install-btn{
+  display:none; align-items:center; gap:6px; background:rgba(255,255,255,0.14); color:var(--white);
+  border:1.5px solid rgba(255,255,255,0.4); font-size:13.5px; font-weight:600; padding:9px 14px;
+  border-radius:var(--radius-btn); transition:all .18s ease; white-space:nowrap;
+}
+.install-btn.is-visible{ display:none; }
+.install-btn:hover{ background:rgba(255,255,255,0.26); border-color:rgba(255,255,255,0.7); transform:translateY(-2px); }
+.install-btn svg{ width:16px; height:16px; flex:none; }
+.hamburger{ display:none; width:40px; height:40px; align-items:center; justify-content:center; background:none; border:none; flex:none; }
+.hamburger span{ display:block; width:20px; height:2px; background:var(--white); position:relative; }
+.hamburger span::before,.hamburger span::after{ content:''; position:absolute; left:0; width:20px; height:2px; background:var(--white); }
+.hamburger span::before{ top:-6px; } .hamburger span::after{ top:6px; }
+.mobile-drawer{ display:none; flex-direction:column; background:var(--teal-dark); max-height:0; overflow:hidden; transition:max-height .3s ease; }
+.mobile-drawer.open{ max-height:360px; overflow-y:auto; }
+.mobile-drawer a{ padding:14px var(--sp-3); color:var(--white); font-size:15px; border-top:1px solid rgba(255,255,255,0.15); transition:background .18s ease; }
+.mobile-drawer a:hover{ background:rgba(255,255,255,0.08); }
+.mobile-drawer-install{
+  display:none; width:100%; text-align:left; background:none; border:none; border-top:1px solid rgba(255,255,255,0.15);
+  color:var(--white); font-size:15px; padding:14px var(--sp-3); font-family:inherit; cursor:pointer; align-items:center; gap:8px;
+}
+.mobile-drawer-install.is-visible{ display:flex; }
+.mobile-drawer-install:hover{ background:rgba(255,255,255,0.08); }
+.mobile-drawer-install svg{ width:16px; height:16px; flex:none; }
+
+/* Page hero */
+.page-hero{ background:var(--teal); padding:var(--sp-6) 0; }
+.page-hero h1{ color:var(--white); font-size:36px; margin-bottom:8px; }
+.page-hero p{ color:rgba(255,255,255,0.88); font-size:16px; max-width:560px; }
+
+.icon-sq{ width:44px; height:44px; border-radius:10px; background:var(--teal-tint); display:flex; align-items:center; justify-content:center; flex:none; }
+.icon-sq svg *{ stroke:var(--teal); }
+
+/* Contact layout */
+.contact-grid{ display:grid; grid-template-columns:0.9fr 1.1fr; gap:var(--sp-5); align-items:start; }
+
+.info-card{
+  display:flex; gap:var(--sp-2); align-items:flex-start;
+  background:var(--white); border:1px solid var(--border); border-radius:var(--radius-card);
+  padding:var(--sp-3); margin-bottom:var(--sp-2); transition:border-color .2s ease;
+}
+.info-card:hover{ border-color:var(--teal); }
+.info-card h4{ font-size:15px; margin-bottom:2px; }
+.info-card p, .info-card a.info-value{ font-size:13.5px; color:var(--ink-soft); }
+.info-card a.info-value:hover{ color:var(--teal); }
+.stars-inline{ color:var(--gold); font-size:13px; letter-spacing:1px; margin-bottom:2px; }
+
+.map-card{
+  border:1px solid var(--border); border-radius:var(--radius-card); overflow:hidden; margin-top:var(--sp-3);
+}
+.map-card iframe{ width:100%; height:260px; border:0; display:block; }
+.map-caption{ padding:var(--sp-2) var(--sp-3); display:flex; align-items:center; justify-content:space-between; background:var(--bg-alt); }
+.map-caption span{ font-size:13px; color:var(--ink-soft); }
+.map-caption a{ font-size:13px; font-weight:600; color:var(--teal-dark); }
+
+/* Form */
+.form-card{ background:var(--bg-alt); border:1px solid var(--border); border-radius:var(--radius-card); padding:var(--sp-4); }
+.form-card h3{ font-size:20px; margin-bottom:4px; }
+.form-card > p{ font-size:13.5px; color:var(--ink-soft); margin-bottom:var(--sp-3); }
+.field{ margin-bottom:var(--sp-2); }
+.field label{ display:block; font-size:13.5px; font-weight:600; margin-bottom:6px; }
+.field input, .field select, .field textarea{
+  width:100%; font-family:inherit; font-size:14.5px; color:var(--ink);
+  background:var(--white); border:1.5px solid var(--border); border-radius:var(--radius-btn);
+  padding:12px 14px; transition:border-color .18s ease;
+}
+.field input:focus, .field select:focus, .field textarea:focus{ outline:none; border-color:var(--teal); }
+.field textarea{ resize:vertical; min-height:110px; }
+.field-row{ display:grid; grid-template-columns:1fr 1fr; gap:var(--sp-2); }
+
+/* Footer (shared) */
+footer{ background:var(--bg-alt); border-top:1px solid var(--border); }
+.footer-grid{ display:grid; grid-template-columns:1.5fr 1fr 1fr 1.2fr; gap:var(--sp-4); padding:var(--sp-6) 0 var(--sp-4); }
+.footer-brand .logo{ color:var(--ink); margin-bottom:var(--sp-2); }
+.footer-brand .logo-mark{ background:var(--teal); }
+.footer-brand .logo-mark svg path{ fill:var(--white); }
+.footer-brand p{ font-size:13.5px; color:var(--ink-soft); max-width:250px; }
+footer h4{ font-size:14px; margin-bottom:var(--sp-2); }
+.footer-links li{ margin-bottom:10px; }
+.footer-links a{ font-size:13.5px; color:var(--ink-soft); }
+.footer-links a:hover{ color:var(--teal); }
+.footer-contact li{ font-size:13.5px; color:var(--ink-soft); margin-bottom:10px; }
+.footer-contact a:hover{ color:var(--teal); }
+.footer-bottom{ border-top:1px solid var(--border); text-align:center; padding:var(--sp-2) 0; font-size:12.5px; color:var(--ink-soft); }
+
+@media (max-width:900px){
+  section{ padding:var(--sp-6) 0; }
+  .nav-links, .nav-actions .signin{ display:none; }
+  .hamburger{ display:flex; }
+  .mobile-drawer{ display:flex; }
+  .page-hero h1{ font-size:28px; }
+  .contact-grid{ grid-template-columns:1fr; gap:var(--sp-4); }
+  .field-row{ grid-template-columns:1fr; }
+  .footer-grid{ grid-template-columns:1fr 1fr; gap:var(--sp-3); }
+  .footer-brand{ grid-column:1/-1; }
+}
+@media (max-width:480px){
+  .footer-grid{ grid-template-columns:1fr; }
+  .install-btn.is-visible{ display:none; }
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="nav-inner">
+    <div class="logo">
+    <span class="logo-mark">
+        <svg width="22" height="22" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <text
+                x="50%"
+                y="52%"
+                text-anchor="middle"
+                dominant-baseline="middle"
+                font-family="Poppins, Arial, sans-serif"
+                font-size="52"
+                font-weight="650"
+                letter-spacing="-2"
+                fill="#007A7A">
+                Rp
+            </text>
+        </svg>
+    </span>
+    Repair Partner
+</div>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="about.html">About Us</a>
+      <a href="contact.html" class="active">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="install-btn" id="installAppBtn" aria-label="Install App" type="button">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 17v2a2 2 0 002 2h10a2 2 0 002-2v-2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Install App</span>
+      </button>
+      <a href="signin.html" class="signin">Sign In</a>
+      <a href="signup.html" class="btn btn-light">Sign Up</a>
+      <button class="hamburger" aria-label="Menu" onclick="document.querySelector('.mobile-drawer').classList.toggle('open')"><span></span></button>
+    </div>
+  </div>
+  <div class="mobile-drawer">
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="about.html">About Us</a>
+    <a href="contact.html">Contact</a>
+    <a href="signin.html">Sign In</a>
+    <a href="signup.html">Sign Up</a>
+    <button class="mobile-drawer-install" id="installAppBtnMobile" type="button">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 17v2a2 2 0 002 2h10a2 2 0 002-2v-2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Install App
+    </button>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <h1>Contact Us</h1>
+    <p>Have a question, a repair request, or feedback? We'd love to hear from you.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap contact-grid">
+
+    <!-- LEFT: contact info + map -->
+    <div>
+      <div class="info-card">
+        <div class="icon-sq"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 5h16v14H4z" stroke-width="1.7" stroke-linejoin="round"/><path d="M4 6l8 7 8-7" stroke-width="1.7" stroke-linejoin="round"/></svg></div>
+        <div>
+          <h4>Email</h4>
+          <a class="info-value" href="mailto:hello@repairpartner.in">hello@repairpartner.in</a>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="icon-sq"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 5c0 8.3 6.7 15 15 15l3-4-6-3-2 2c-2.5-1.2-4.5-3.2-5.7-5.7l2-2-3-6-4 3z" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+        <div>
+          <h4>Phone</h4>
+          <a class="info-value" href="tel:+919876543210">+91 98765 43210</a><br>
+          <a class="info-value" href="tel:+919123456780">+91 91234 56780</a>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="icon-sq"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2l2.9 6 6.6.6-5 4.5 1.5 6.5-6-3.6-6 3.6 1.5-6.5-5-4.5 6.6-.6z" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+        <div>
+          <h4>Rate Us</h4>
+          <div class="stars-inline">★★★★★</div>
+          <a class="info-value" href="#" target="_blank" rel="noopener">Leave a review on Google</a>
+        </div>
+      </div>
+
+      <div class="map-card">
+        <iframe src="https://www.google.com/maps?q=Baner,Pune,Maharashtra&output=embed" loading="lazy" title="Repair Partner location map" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <div class="map-caption">
+          <span>Baner Road, Pune, Maharashtra 411045</span>
+          <a href="https://www.google.com/maps?q=Baner,Pune,Maharashtra" target="_blank" rel="noopener">Get Directions →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: message form -->
+    <div class="form-card">
+      <h3>Send Us a Message</h3>
+      <p>Fill in the details below and we'll get back to you within 24 hours.</p>
+      <form onsubmit="return false;">
+        <div class="field-row">
+          <div class="field">
+            <label for="name">Full Name</label>
+            <input id="name" type="text" placeholder="Your name" required>
+          </div>
+          <div class="field">
+            <label for="phone">Phone Number</label>
+            <input id="phone" type="tel" placeholder="+91 98765 43210" required>
+          </div>
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" type="email" placeholder="you@email.com" required>
+        </div>
+        <div class="field">
+          <label for="topic">What can we help with?</label>
+          <select id="topic">
+            <option>Book a repair</option>
+            <option>Bulk / business repair enquiry</option>
+            <option>Order status</option>
+            <option>General question</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea id="message" placeholder="Tell us what's broken, or how we can help..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Send Message</button>
+      </form>
+    </div>
+
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo"><span class="logo-mark"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M14 3L4 14h6l-1 7 10-11h-6l1-7z"/></svg></span>Repair Partner</div>
+        <p>Doorstep repair for appliances, electronics, power tools and more — across Pune.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul class="footer-links">
+          <li><a href="services.html">Kitchen Appliances</a></li>
+          <li><a href="services.html">Home Appliances</a></li>
+          <li><a href="services.html">Audio Devices</a></li>
+          <li><a href="services.html">Power Tools</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul class="footer-contact">
+          <li><a href="mailto:hello@repairpartner.in">hello@repairpartner.in</a></li>
+          <li><a href="tel:+919876543210">+91 98765 43210</a></li>
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 Repair Partner. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  let deferredPrompt = null;
+  const desktopBtn = document.getElementById('installAppBtn');
+  const mobileBtn = document.getElementById('installAppBtnMobile');
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    if(desktopBtn) desktopBtn.classList.add('is-visible');
+    if(mobileBtn) mobileBtn.classList.add('is-visible');
+  });
+
+  async function doInstall(){
+    if(!deferredPrompt) return;
+    deferredPrompt.prompt();
+    await deferredPrompt.userChoice;
+    deferredPrompt = null;
+    if(desktopBtn) desktopBtn.classList.remove('is-visible');
+    if(mobileBtn) mobileBtn.classList.remove('is-visible');
+  }
+  if(desktopBtn) desktopBtn.addEventListener('click', doInstall);
+  if(mobileBtn) mobileBtn.addEventListener('click', doInstall);
+
+  window.addEventListener('appinstalled', () => {
+    if(desktopBtn) desktopBtn.classList.remove('is-visible');
+    if(mobileBtn) mobileBtn.classList.remove('is-visible');
+  });
+
+  if('serviceWorker' in navigator){
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js').catch(() => {});
+    });
+  }
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "name": "Repair Partner - Doorstep Appliance Repair",
+  "short_name": "Repair Partner",
+  "description": "Doorstep pickup, repair & delivery for appliances, electronics and power tools across Pune.",
+  "start_url": "index.html",
+  "scope": ".",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#009999",
+  "orientation": "portrait-primary",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

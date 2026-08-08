@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign In — Repair Partner</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#009999">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --teal:#009999;
+  --teal-dark:#007a7a;
+  --teal-tint:#E4F5F5;
+  --ink:#14201F;
+  --ink-soft:#54615F;
+  --border:#E3E9E8;
+  --bg-alt:#F7FAF9;
+  --white:#FFFFFF;
+  --red:#D64545;
+  --green:#1E9E62;
+
+  --radius-card:16px;
+  --radius-btn:10px;
+  --sp-1:8px; --sp-2:16px; --sp-3:24px; --sp-4:25px; --sp-5:35px; --sp-6:40px; --sp-8:55px;
+  --container:1180px;
+}
+*{ margin:0; padding:0; box-sizing:border-box; }
+body{ font-family:'Inter', sans-serif; color:var(--ink); background:var(--bg-alt); line-height:1.55; -webkit-font-smoothing:antialiased; min-height:100vh; }
+h1,h2,h3,h4{ font-family:'Poppins', sans-serif; font-weight:700; color:var(--ink); letter-spacing:-0.01em; }
+a{ text-decoration:none; color:inherit; }
+img,svg{ display:block; }
+button{ font-family:inherit; cursor:pointer; }
+input{ font-family:inherit; }
+
+.wrap{ max-width:var(--container); margin:0 auto; padding:0 var(--sp-3); }
+
+/* Minimal top bar */
+.topbar{ background:var(--teal); }
+.topbar-inner{ max-width:var(--container); margin:0 auto; padding:0 var(--sp-3); height:72px; display:flex; align-items:center; justify-content:space-between; gap:var(--sp-2); }
+.logo{ display:flex; align-items:center; gap:8px; font-family:'Poppins',sans-serif; font-weight:700; font-size:19px; color:var(--white); flex:none; }
+.logo-mark{ width:30px; height:30px; border-radius:8px; background:var(--white); display:flex; align-items:center; justify-content:center; }
+.topbar-nav{ display:flex; align-items:center; gap:var(--sp-3); }
+.topbar-link{ position:relative; color:rgba(255,255,255,0.9); font-size:14.5px; font-weight:500; transition:color .2s ease; white-space:nowrap; }
+.topbar-link:hover{ color:var(--white); }
+.topbar-link b{ color:var(--white); font-weight:600; }
+.topbar-actions{ display:flex; align-items:center; gap:var(--sp-2); flex:none; }
+.install-btn{
+  display:none; align-items:center; gap:6px; background:rgba(255,255,255,0.14); color:var(--white);
+  border:1.5px solid rgba(255,255,255,0.4); font-size:13.5px; font-weight:600; padding:9px 14px;
+  border-radius:var(--radius-btn); transition:all .18s ease; white-space:nowrap;
+}
+.install-btn.is-visible{ display:none; }
+.install-btn:hover{ background:rgba(255,255,255,0.26); border-color:rgba(255,255,255,0.7); transform:translateY(-2px); }
+.install-btn svg{ width:16px; height:16px; flex:none; }
+.topbar-signup-btn{ flex:none; }
+
+/* Auth layout */
+.auth-stage{ min-height:calc(100vh - 72px); display:flex; align-items:center; justify-content:center; padding:var(--sp-6) var(--sp-3); }
+.auth-card{
+  width:100%; max-width:450px; background:var(--white); border:1px solid var(--border);
+  border-radius:var(--radius-card); padding:var(--sp-5); box-shadow:0 12px 32px rgba(20,32,31,0.06);
+}
+.auth-icon{
+  width:52px; height:52px; border-radius:14px; background:var(--teal-tint);
+  display:flex; align-items:center; justify-content:center; margin-bottom:var(--sp-3);
+}
+.auth-card h2{ font-size:24px; margin-bottom:3px; }
+.auth-card > p.sub{ font-size:14px; color:var(--ink-soft); margin-bottom:var(--sp-4); }
+
+.field{ margin-bottom:var(--sp-3); }
+.field label{ display:block; font-size:13.5px; font-weight:600; margin-bottom:4px; }
+.field input{
+  width:100%; font-size:14.5px; color:var(--ink); background:var(--white);
+  border:1.5px solid var(--border); border-radius:var(--radius-btn); padding:9px 12px;
+  transition:border-color .18s ease;
+}
+.field input:focus{ outline:none; border-color:var(--teal); }
+.password-field{ position:relative; }
+.password-toggle{
+  position:absolute; right:12px; top:50%; transform:translateY(-50%);
+  background:none; border:none; color:var(--ink-soft); display:flex; padding:4px;
+}
+.password-toggle:hover{ color:var(--teal); }
+
+.row-between{ display:flex; align-items:center; justify-content:space-between; margin:-8px 0 var(--sp-4); }
+.remember{ display:flex; align-items:center; gap:8px; font-size:13.5px; color:var(--ink-soft); }
+.remember input{ accent-color:var(--teal); width:15px; height:15px; }
+.link-teal{ font-size:13.5px; font-weight:600; color:var(--teal-dark); background:none; border:none; }
+.link-teal:hover{ text-decoration:underline; }
+
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  font-weight:600; font-size:15px; padding:9px 12px; border-radius:var(--radius-btn);
+  transition:all .18s ease; border:1.5px solid transparent; width:100%;
+}
+.btn:hover{ transform:translateY(-2px); }
+.btn:active{ transform:translateY(0); }
+.btn-light{ background:var(--white); color:var(--ink); width:auto; }
+.btn-light:hover{ background:#EFF3F2; }
+.btn-primary{ background:var(--teal); color:var(--white); }
+.btn-primary:hover{ background:var(--teal-dark); }
+.btn-primary:disabled{ background:var(--border); color:var(--ink-soft); cursor:not-allowed; }
+.btn-primary:disabled:hover{ transform:none; }
+.btn-google{ background:var(--white); color:var(--ink); border-color:var(--border); gap:10px; }
+.btn-google:hover{ border-color:var(--teal); box-shadow:0 4px 14px rgba(0,153,153,0.12); }
+.btn-google svg{ flex:none; }
+
+.divider{ display:flex; align-items:center; gap:12px; margin:var(--sp-4) 0; }
+.divider::before,.divider::after{ content:''; flex:1; height:1px; background:var(--border); }
+.divider span{ font-size:12.5px; color:var(--ink-soft); }
+
+.switch-line{ text-align:center; font-size:14px; color:var(--ink-soft); }
+.switch-line a{ font-weight:600; color:var(--teal-dark); }
+.switch-line a:hover{ text-decoration:underline; }
+
+.error-msg{ font-size:12.5px; color:var(--red); margin-top:6px; display:none; }
+.field.has-error input{ border-color:var(--red); }
+.field.has-error .error-msg{ display:block; }
+
+.back-link{ display:inline-flex; align-items:center; gap:6px; font-size:13.5px; font-weight:600; color:var(--ink-soft); margin-bottom:var(--sp-3); }
+.back-link:hover{ color:var(--teal); }
+
+.confirm-box{ text-align:center; }
+.confirm-icon{
+  width:64px; height:64px; border-radius:50%; background:var(--teal-tint);
+  display:flex; align-items:center; justify-content:center; margin:0 auto var(--sp-3);
+}
+.confirm-box h2{ font-size:20px; margin-bottom:6px; }
+.confirm-box p{ font-size:14px; color:var(--ink-soft); margin-bottom:var(--sp-4); }
+
+#panel-reset-confirm{ display:none; }
+
+@media (max-width:600px){
+  .topbar-nav{ display:none; }
+}
+@media (max-width:480px){
+  .auth-card{ padding:var(--sp-4) var(--sp-3); }
+  .topbar-inner{ height:auto; padding:12px var(--sp-3); flex-wrap:wrap; row-gap:10px; }
+  .install-btn .install-text{ display:none; }
+  .install-btn{ padding:9px 10px; }
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-mark">
+        <svg width="22" height="22" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <text
+                x="50%"
+                y="52%"
+                text-anchor="middle"
+                dominant-baseline="middle"
+                font-family="Poppins, Arial, sans-serif"
+                font-size="52"
+                font-weight="650"
+                letter-spacing="-2"
+                fill="#007A7A">
+                Rp
+            </text>
+        </svg>
+      </span>
+      Repair Partner
+    </a>
+    <nav class="topbar-nav">
+    </nav>
+    <div class="topbar-actions">
+      <button class="install-btn" id="installAppBtn" aria-label="Install App" type="button">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 17v2a2 2 0 002 2h10a2 2 0 002-2v-2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="install-text">Install App</span>
+      </button>
+      <a href="signup.html" class="btn btn-light topbar-signup-btn">Sign Up</a>
+    </div>
+  </div>
+</header>
+
+<div class="auth-stage">
+
+  <!-- SIGN IN PANEL -->
+  <div class="auth-card" id="panel-signin">
+    <h2>Welcome back</h2>
+    <p class="sub">Sign in to book repairs and track your requests.</p>
+
+    <form id="signinForm" onsubmit="return false;">
+      <div class="field" id="fld-email">
+        <label for="si-email">Email</label>
+        <input id="si-email" type="email" placeholder="you@email.com" required>
+        <div class="error-msg">Enter a valid email address.</div>
+      </div>
+
+      <div class="field" id="fld-pass">
+        <label for="si-pass">Password</label>
+        <div class="password-field">
+          <input id="si-pass" type="password" placeholder="Enter your password" required>
+          <button type="button" class="password-toggle" onclick="togglePassword('si-pass', this)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.6"/></svg>
+          </button>
+        </div>
+        <div class="error-msg">Password is required.</div>
+      </div>
+
+      <div class="row-between">
+        <label class="remember"><input type="checkbox"> Remember me</label>
+        <button type="button" class="link-teal" onclick="showPanel('reset')">Forgot password?</button>
+      </div>
+      <button type="submit" class="btn btn-primary" onclick="validateSignin()">Sign In</button>
+    </form>
+
+    <div class="divider"><span>OR</span></div>
+    <button type="button" class="btn btn-google" onclick="alert('Continue with Google (demo)')">
+      <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.9 32.6 29.4 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.1 8 3l6-6C34.9 5.1 29.7 3 24 3 12.4 3 3 12.4 3 24s9.4 21 21 21 21-9.4 21-21c0-1.4-.1-2.7-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.6 15.9 19 13 24 13c3.1 0 5.8 1.1 8 3l6-6C34.9 5.1 29.7 3 24 3 16.3 3 9.6 7.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 45c5.6 0 10.7-2.1 14.5-5.6l-6.7-5.5C29.6 35.6 26.9 36.5 24 36.5c-5.3 0-9.8-3.4-11.4-8.1l-6.6 5.1C9.5 40.6 16.2 45 24 45z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-1.1 3-3.2 5.5-5.9 7l6.7 5.5C39.6 37.4 45 31.5 45 24c0-1.4-.1-2.7-.4-3.5z"/></svg>
+      Continue with Google
+    </button>
+  </div>
+
+  <!-- FORGOT PASSWORD PANEL -->
+  <div class="auth-card" id="panel-reset" style="display:none;">
+    <a href="#" class="back-link" onclick="showPanel('signin');return false;">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Back to Sign In
+    </a>
+    <div class="auth-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="4" y="10" width="16" height="10" rx="2" stroke="#009999" stroke-width="1.8"/><path d="M8 10V7a4 4 0 018 0v3" stroke="#009999" stroke-width="1.8"/></svg></div>
+    <h2>Reset your password</h2>
+    <p class="sub">Enter the email linked to your account and we'll send you a reset link.</p>
+
+    <form onsubmit="return false;">
+      <div class="field" id="fld-reset-email">
+        <label for="rs-email">Email</label>
+        <input id="rs-email" type="email" placeholder="you@email.com" required>
+        <div class="error-msg">Enter a valid email address.</div>
+      </div>
+      <button type="submit" class="btn btn-primary" onclick="validateReset()">Send Reset Link</button>
+    </form>
+  </div>
+
+  <!-- RESET CONFIRMATION -->
+  <div class="auth-card" id="panel-reset-confirm">
+    <div class="confirm-box">
+      <div class="confirm-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M4 5h16v14H4z" stroke="#009999" stroke-width="1.7" stroke-linejoin="round"/><path d="M4 6l8 7 8-7" stroke="#009999" stroke-width="1.7" stroke-linejoin="round"/></svg></div>
+      <h2>Check your inbox</h2>
+      <p>We've sent a password reset link to <b id="reset-email-echo"></b>. Follow the link to set a new password.</p>
+      <button class="btn btn-primary" onclick="showPanel('signin')">Back to Sign In</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function showPanel(name){
+  document.getElementById('panel-signin').style.display = name==='signin' ? 'block' : 'none';
+  document.getElementById('panel-reset').style.display = name==='reset' ? 'block' : 'none';
+  document.getElementById('panel-reset-confirm').style.display = name==='reset-confirm' ? 'block' : 'none';
+}
+function togglePassword(id, btn){
+  const input = document.getElementById(id);
+  input.type = input.type === 'password' ? 'text' : 'password';
+}
+function isValidEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+
+function validateSignin() {
+  const email = document.getElementById('si-email');
+  const pass = document.getElementById('si-pass');
+
+  let ok = true;
+
+  document.getElementById('fld-email').classList.toggle('has-error', !isValidEmail(email.value));
+  if (!isValidEmail(email.value)) ok = false;
+
+  document.getElementById('fld-pass').classList.toggle('has-error', pass.value.length === 0);
+  if (pass.value.length === 0) ok = false;
+
+  if (ok) {
+    window.location.href = "post-login/dashboard.html";
+  }
+}
+
+function validateReset(){
+  const email = document.getElementById('rs-email');
+  const invalid = !isValidEmail(email.value);
+  document.getElementById('fld-reset-email').classList.toggle('has-error', invalid);
+  if(!invalid){
+    document.getElementById('reset-email-echo').textContent = email.value;
+    showPanel('reset-confirm');
+  }
+}
+
+(function(){
+  let deferredPrompt = null;
+  const installBtn = document.getElementById('installAppBtn');
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    if(installBtn) installBtn.classList.add('is-visible');
+  });
+
+  if(installBtn){
+    installBtn.addEventListener('click', async () => {
+      if(!deferredPrompt) return;
+      deferredPrompt.prompt();
+      await deferredPrompt.userChoice;
+      deferredPrompt = null;
+      installBtn.classList.remove('is-visible');
+    });
+  }
+
+  window.addEventListener('appinstalled', () => {
+    if(installBtn) installBtn.classList.remove('is-visible');
+  });
+
+  if('serviceWorker' in navigator){
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js').catch(() => {});
+    });
+  }
+})();
+</script>
+
+</body>
+</html>

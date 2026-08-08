@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign Up — Repair Partner</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#009999">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --teal:#009999;
+  --teal-dark:#007a7a;
+  --teal-tint:#E4F5F5;
+  --ink:#14201F;
+  --ink-soft:#54615F;
+  --border:#E3E9E8;
+  --bg-alt:#F7FAF9;
+  --white:#FFFFFF;
+  --red:#D64545;
+  --green:#1E9E62;
+
+  --radius-card:16px;
+  --radius-btn:10px;
+  --sp-1:8px; --sp-2:16px; --sp-3:24px; --sp-4:32px; --sp-5:40px; --sp-6:48px; --sp-8:64px;
+  --container:1180px;
+}
+*{ margin:0px; padding:1px; box-sizing:border-box; }
+body{ font-family:'Inter', sans-serif; color:var(--ink); background:var(--bg-alt); line-height:1.55; -webkit-font-smoothing:antialiased; min-height:100vh; }
+h1,h2,h3,h4{ font-family:'Poppins', sans-serif; font-weight:700; color:var(--ink); letter-spacing:-0.01em; }
+a{ text-decoration:none; color:inherit; }
+img,svg{ display:block; }
+button{ font-family:inherit; cursor:pointer; }
+input,select,textarea{ font-family:inherit; }
+
+.wrap{ max-width:var(--container); margin:0 auto; padding:0 var(--sp-3); }
+
+/* Minimal top bar */
+.topbar{ background:var(--teal); }
+.topbar-inner{ max-width:var(--container); margin:0 auto; padding:0 var(--sp-3); height:72px; display:flex; align-items:center; justify-content:space-between; gap:var(--sp-2); }
+.logo{ display:flex; align-items:center; gap:8px; font-family:'Poppins',sans-serif; font-weight:700; font-size:19px; color:var(--white); flex:none; }
+.logo-mark{ width:30px; height:30px; border-radius:8px; background:var(--white); display:flex; align-items:center; justify-content:center; }
+.topbar-nav{ display:flex; align-items:center; gap:var(--sp-3); }
+.topbar-link{ position:relative; color:rgba(255,255,255,0.9); font-size:14.5px; font-weight:500; transition:color .2s ease; white-space:nowrap; }
+.topbar-link:hover{ color:var(--white); }
+.topbar-link b{ color:var(--white); font-weight:600; }
+.topbar-actions{ display:flex; align-items:center; gap:var(--sp-2); flex:none; }
+.install-btn{
+  display:none; align-items:center; gap:6px; background:rgba(255,255,255,0.14); color:var(--white);
+  border:1.5px solid rgba(255,255,255,0.4); font-size:13.5px; font-weight:600; padding:9px 14px;
+  border-radius:var(--radius-btn); transition:all .18s ease; white-space:nowrap;
+}
+.install-btn.is-visible{ display:none; }
+.install-btn:hover{ background:rgba(255,255,255,0.26); border-color:rgba(255,255,255,0.7); transform:translateY(-2px); }
+.install-btn svg{ width:16px; height:16px; flex:none; }
+
+/* Auth layout */
+.auth-stage{ min-height:calc(100vh - 72px); display:flex; align-items:flex-start; justify-content:center; padding:var(--sp-6) var(--sp-3); }
+.auth-col{ width:100%; max-width:460px; }
+
+/* Stepper */
+.stepper{ display:flex; align-items:center; justify-content:space-between; margin-bottom:var(--sp-4); }
+.stepper .step{ display:flex; flex-direction:column; align-items:center; gap:6px; flex:1; position:relative; }
+.stepper .step:not(:last-child)::after{
+  content:''; position:absolute; top:15px; left:50%; width:100%; height:2px; background:var(--border); z-index:0;
+}
+.stepper .step.done:not(:last-child)::after{ background:var(--teal); }
+.step-dot{
+  width:30px; height:30px; border-radius:50%; background:var(--white); border:2px solid var(--border);
+  color:var(--ink-soft); font-family:'Poppins',sans-serif; font-weight:700; font-size:13px;
+  display:flex; align-items:center; justify-content:center; z-index:1; transition:all .2s ease;
+}
+.step.active .step-dot{ border-color:var(--teal); color:var(--teal); background:var(--white); }
+.step.done .step-dot{ background:var(--teal); border-color:var(--teal); color:var(--white); }
+.step-label{ font-size:11.5px; color:var(--ink-soft); font-weight:600; text-align:center; }
+.step.active .step-label{ color:var(--ink); }
+
+.auth-card{
+  width:100%; background:var(--white); border:1px solid var(--border);
+  border-radius:var(--radius-card); padding:var(--sp-5); box-shadow:0 12px 32px rgba(20,32,31,0.06);
+}
+.auth-icon{
+  width:52px; height:52px; border-radius:14px; background:var(--teal-tint);
+  display:flex; align-items:center; justify-content:center; margin-bottom:var(--sp-3);
+}
+.auth-card h2{ font-size:22px; margin-bottom:6px; }
+.auth-card > p.sub{ font-size:14px; color:var(--ink-soft); margin-bottom:var(--sp-4); }
+
+.field{ margin-bottom:var(--sp-3); }
+.field label{ display:block; font-size:13.5px; font-weight:600; margin-bottom:6px; }
+.field .optional-tag{ font-weight:400; color:var(--ink-soft); font-size:12.5px; }
+.field input, .field textarea{
+  width:100%; font-size:14.5px; color:var(--ink); background:var(--white);
+  border:1.5px solid var(--border); border-radius:var(--radius-btn); padding:12px 14px;
+  transition:border-color .18s ease;
+}
+.field textarea{ resize:vertical; min-height:80px; }
+.field input:focus, .field textarea:focus{ outline:none; border-color:var(--teal); }
+.field-row{ display:grid; grid-template-columns:1fr 1fr; gap:var(--sp-2); }
+.field-row.three{ grid-template-columns:1fr 1fr 1fr; }
+
+.password-field{ position:relative; }
+.password-toggle{ position:absolute; right:12px; top:50%; transform:translateY(-50%); background:none; border:none; color:var(--ink-soft); display:flex; padding:4px; }
+.password-toggle:hover{ color:var(--teal); }
+
+.error-msg{ font-size:12.5px; color:var(--red); margin-top:6px; display:none; }
+.field.has-error input, .field.has-error textarea{ border-color:var(--red); }
+.field.has-error .error-msg{ display:block; }
+
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  font-weight:600; font-size:15px; padding:13px 26px; border-radius:var(--radius-btn);
+  transition:all .18s ease; border:1.5px solid transparent; width:100%;
+}
+.btn:hover{ transform:translateY(-2px); }
+.btn:active{ transform:translateY(0); }
+.btn-primary{ background:var(--teal); color:var(--white); }
+.btn-primary:hover{ background:var(--teal-dark); }
+.btn-primary:disabled{ background:var(--border); color:var(--ink-soft); cursor:not-allowed; }
+.btn-primary:disabled:hover{ transform:none; }
+.btn-secondary{ background:var(--white); color:var(--ink); border-color:var(--border); }
+.btn-secondary:hover{ border-color:var(--teal); color:var(--teal); }
+.btn-row{ display:flex; gap:var(--sp-2); }
+.btn-row .btn{ flex:1; }
+
+.switch-line{ text-align:center; font-size:14px; color:var(--ink-soft); margin-top:var(--sp-3); }
+.switch-line a{ font-weight:600; color:var(--teal-dark); }
+.switch-line a:hover{ text-decoration:underline; }
+
+.back-link{ display:inline-flex; align-items:center; gap:6px; font-size:13.5px; font-weight:600; color:var(--ink-soft); margin-bottom:var(--sp-3); background:none; border:none; }
+.back-link:hover{ color:var(--teal); }
+
+/* OTP boxes */
+.otp-row{ display:flex; gap:10px; justify-content:space-between; margin-bottom:var(--sp-2); }
+.otp-box{
+  width:15%; aspect-ratio:1/1; text-align:center; font-size:20px; font-weight:700;
+  border:1.5px solid var(--border); border-radius:var(--radius-btn); color:var(--ink);
+}
+.otp-box:focus{ outline:none; border-color:var(--teal); }
+.otp-meta{ display:flex; justify-content:space-between; align-items:center; margin-bottom:var(--sp-4); font-size:13px; }
+.otp-meta .timer{ color:var(--ink-soft); }
+.otp-meta .resend{ font-weight:600; color:var(--teal-dark); background:none; border:none; }
+.otp-meta .resend:disabled{ color:var(--ink-soft); cursor:not-allowed; }
+.otp-sent-to{ font-size:14px; color:var(--ink-soft); margin-bottom:var(--sp-3); }
+.otp-sent-to b{ color:var(--ink); }
+
+/* Password rules */
+.rules-list{ margin-bottom:var(--sp-3); display:grid; grid-template-columns:1fr 1fr; gap:8px 12px; }
+.rule{ display:flex; align-items:center; gap:8px; font-size:12.5px; color:var(--ink-soft); }
+.rule .rule-dot{
+  width:16px; height:16px; border-radius:50%; border:1.5px solid var(--border);
+  display:flex; align-items:center; justify-content:center; flex:none; transition:all .18s ease;
+}
+.rule.valid{ color:var(--green); }
+.rule.valid .rule-dot{ background:var(--green); border-color:var(--green); }
+.rule.valid .rule-dot svg{ display:block; }
+.rule .rule-dot svg{ display:none; }
+
+/* Success */
+.confirm-box{ text-align:center; }
+.confirm-icon{ width:64px; height:64px; border-radius:50%; background:var(--teal-tint); display:flex; align-items:center; justify-content:center; margin:0 auto var(--sp-3); }
+.confirm-box h2{ font-size:22px; margin-bottom:6px; }
+.confirm-box p{ font-size:14px; color:var(--ink-soft); margin-bottom:var(--sp-4); }
+
+.step-panel{ display:none; }
+.step-panel.active{ display:block; }
+
+@media (max-width:600px){
+  .topbar-nav{ display:none; }
+}
+@media (max-width:480px){
+  .auth-card{ padding:var(--sp-4) var(--sp-3); }
+  .field-row, .field-row.three{ grid-template-columns:1fr; }
+  .step-label{ display:none; }
+  .rules-list{ grid-template-columns:1fr; }
+  .topbar-inner{ height:auto; padding:12px var(--sp-3); flex-wrap:wrap; row-gap:10px; }
+  .install-btn .install-text{ display:none; }
+  .install-btn{ padding:9px 10px; }
+  .otp-row{ gap:6px; }
+  .otp-box{ width:13%; font-size:17px; }
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-mark">
+        <svg width="22" height="22" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <text
+                x="50%"
+                y="52%"
+                text-anchor="middle"
+                dominant-baseline="middle"
+                font-family="Poppins, Arial, sans-serif"
+                font-size="52"
+                font-weight="650"
+                letter-spacing="-2"
+                fill="#007A7A">
+                Rp
+            </text>
+        </svg>
+      </span>
+      Repair Partner
+    </a>
+    <div class="topbar-actions">
+      <button class="install-btn" id="installAppBtn" aria-label="Install App" type="button">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 17v2a2 2 0 002 2h10a2 2 0 002-2v-2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="install-text">Install App</span>
+      </button>
+      <a href="signin.html" class="topbar-link">Account exists? <b>Sign In</b></a>
+    </div>
+  </div>
+</header>
+
+<div class="auth-stage">
+  <div class="auth-col">
+
+    <div class="stepper" id="stepper">
+      <div class="step active" data-step="1"><div class="step-dot">1</div><div class="step-label">Email</div></div>
+      <div class="step" data-step="2"><div class="step-dot">2</div><div class="step-label">Verify OTP</div></div>
+      <div class="step" data-step="3"><div class="step-dot">3</div><div class="step-label">Password</div></div>
+      <div class="step" data-step="4"><div class="step-dot">4</div><div class="step-label">Profile</div></div>
+    </div>
+
+    <div class="auth-card">
+
+      <!-- STEP 1: EMAIL -->
+      <div class="step-panel active" id="step-1">
+        <div class="auth-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 5h16v14H4z" stroke="#009999" stroke-width="1.7" stroke-linejoin="round"/><path d="M4 6l8 7 8-7" stroke="#009999" stroke-width="1.7" stroke-linejoin="round"/></svg></div>
+        <h2>Create your account</h2>
+        <p class="sub">Enter your email to receive a verification code.</p>
+
+        <form onsubmit="return false;">
+          <div class="field" id="fld-signup-email">
+            <label for="su-email">Email</label>
+            <input id="su-email" type="email" placeholder="you@email.com" required>
+            <div class="error-msg">Enter a valid email address.</div>
+          </div>
+          <button type="submit" class="btn btn-primary" onclick="submitEmail()">Send OTP</button>
+        </form>
+        <p class="switch-line">Already have an account? <a href="signin.html">Sign In</a></p>
+      </div>
+
+      <!-- STEP 2: OTP -->
+      <div class="step-panel" id="step-2">
+        <button class="back-link" onclick="goToStep(1)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Change email
+        </button>
+        <div class="auth-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="3" stroke="#009999" stroke-width="1.7"/><path d="M9 9h.01M15 9h.01M8 15c1 1 2 1.5 4 1.5s3-.5 4-1.5" stroke="#009999" stroke-width="1.7" stroke-linecap="round"/></svg></div>
+        <h2>Verify your email</h2>
+        <p class="otp-sent-to">We sent a 6-digit code to <b id="otp-email-echo">your email</b></p>
+
+        <div class="otp-row">
+          <input class="otp-box" maxlength="1" inputmode="numeric" data-idx="0">
+          <input class="otp-box" maxlength="1" inputmode="numeric" data-idx="1">
+          <input class="otp-box" maxlength="1" inputmode="numeric" data-idx="2">
+          <input class="otp-box" maxlength="1" inputmode="numeric" data-idx="3">
+          <input class="otp-box" maxlength="1" inputmode="numeric" data-idx="4">
+          <input class="otp-box" maxlength="1" inputmode="numeric" data-idx="5">
+        </div>
+        <div class="field" id="fld-otp" style="margin-top:-8px;">
+          <div class="error-msg">Enter the complete 6-digit code.</div>
+        </div>
+
+        <div class="otp-meta">
+          <span class="timer" id="otp-timer">Resend code in 0:30</span>
+          <button class="resend" id="resend-btn" disabled onclick="resendOtp()">Resend Code</button>
+        </div>
+
+        <button class="btn btn-primary" onclick="verifyOtp()">Verify OTP</button>
+      </div>
+
+      <!-- STEP 3: PASSWORD -->
+      <div class="step-panel" id="step-3">
+        <div class="auth-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="4" y="10" width="16" height="10" rx="2" stroke="#009999" stroke-width="1.8"/><path d="M8 10V7a4 4 0 018 0v3" stroke="#009999" stroke-width="1.8"/></svg></div>
+        <h2>Set a password</h2>
+        <p class="sub">Choose a strong password to secure your account.</p>
+
+        <div class="field" id="fld-new-pass">
+          <label for="su-pass">New Password</label>
+          <div class="password-field">
+            <input id="su-pass" type="password" placeholder="Create a password" oninput="checkPasswordRules()">
+            <button type="button" class="password-toggle" onclick="togglePassword('su-pass')">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.6"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="rules-list" id="rules-list">
+          <div class="rule" id="rule-len"><span class="rule-dot"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L19 7" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>At least 8 characters</div>
+          <div class="rule" id="rule-upper"><span class="rule-dot"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L19 7" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>One uppercase letter</div>
+          <div class="rule" id="rule-lower"><span class="rule-dot"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L19 7" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>One lowercase letter</div>
+          <div class="rule" id="rule-num"><span class="rule-dot"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L19 7" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>One number</div>
+          <div class="rule" id="rule-special"><span class="rule-dot"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L19 7" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>One special character</div>
+        </div>
+
+        <div class="field" id="fld-confirm-pass">
+          <label for="su-pass2">Confirm Password</label>
+          <div class="password-field">
+            <input id="su-pass2" type="password" placeholder="Re-enter your password">
+            <button type="button" class="password-toggle" onclick="togglePassword('su-pass2')">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.6"/></svg>
+            </button>
+          </div>
+          <div class="error-msg">Passwords don't match.</div>
+        </div>
+
+        <button class="btn btn-primary" id="pass-continue-btn" disabled onclick="submitPassword()">Continue</button>
+      </div>
+
+      <!-- STEP 4: PROFILE -->
+      <div class="step-panel" id="step-4">
+        <div class="auth-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="#009999" stroke-width="1.8"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7" stroke="#009999" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <h2>Complete your profile</h2>
+        <p class="sub">Just a few details so we know where to pick up and deliver.</p>
+
+        <div class="field-row three">
+          <div class="field" id="fld-fname">
+            <label for="p-fname">First Name</label>
+            <input id="p-fname" type="text" placeholder="First">
+            <div class="error-msg">Required.</div>
+          </div>
+          <div class="field">
+            <label for="p-mname">Middle Name <span class="optional-tag"></span></label>
+            <input id="p-mname" type="text" placeholder="Middle">
+          </div>
+          <div class="field" id="fld-lname">
+            <label for="p-lname">Last Name</label>
+            <input id="p-lname" type="text" placeholder="Last">
+            <div class="error-msg">Required.</div>
+          </div>
+        </div>
+
+        <div class="field" id="fld-mobile">
+          <label for="p-mobile">Mobile Number</label>
+          <input id="p-mobile" type="tel" placeholder="+91 98765 43210">
+          <div class="error-msg">Enter a valid 10-digit mobile number.</div>
+        </div>
+
+        <div class="field" id="fld-address">
+          <label for="p-address">Address</label>
+          <textarea id="p-address" placeholder="Flat / House no., Street, Area, City, Pincode"></textarea>
+          <div class="error-msg">Address is required.</div>
+        </div>
+
+        <button class="btn btn-primary" onclick="submitProfile()">Create Account</button>
+      </div>
+
+      <!-- STEP 5: SUCCESS -->
+      <div class="step-panel" id="step-5">
+        <div class="confirm-box">
+          <div class="confirm-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L19 7" stroke="#009999" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h2>Account created!</h2>
+          <p>Welcome to Repair Partner, <b id="success-name"></b>. You're all set to book your first repair.</p>
+          <a href="signin.html" class="btn btn-primary">Go to Sign In</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+let currentStep = 1;
+let otpTimerInterval = null;
+
+function goToStep(n){
+  document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('step-'+n).classList.add('active');
+
+  document.querySelectorAll('.stepper .step').forEach(s => {
+    const stepNum = parseInt(s.dataset.step);
+    s.classList.remove('active','done');
+    if(stepNum < n) s.classList.add('done');
+    else if(stepNum === n) s.classList.add('active');
+  });
+
+  currentStep = n;
+  document.getElementById('stepper').style.display = n === 5 ? 'none' : 'flex';
+}
+
+function isValidEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+
+function submitEmail(){
+  const email = document.getElementById('su-email');
+  const invalid = !isValidEmail(email.value);
+  document.getElementById('fld-signup-email').classList.toggle('has-error', invalid);
+  if(invalid) return;
+  document.getElementById('otp-email-echo').textContent = email.value;
+  goToStep(2);
+  startOtpTimer();
+}
+
+function startOtpTimer(){
+  let seconds = 30;
+  const timerEl = document.getElementById('otp-timer');
+  const resendBtn = document.getElementById('resend-btn');
+  resendBtn.disabled = true;
+  clearInterval(otpTimerInterval);
+  otpTimerInterval = setInterval(() => {
+    seconds--;
+    timerEl.textContent = 'Resend code in 0:' + String(seconds).padStart(2,'0');
+    if(seconds <= 0){
+      clearInterval(otpTimerInterval);
+      timerEl.textContent = "Didn't get a code?";
+      resendBtn.disabled = false;
+    }
+  }, 1000);
+}
+function resendOtp(){ startOtpTimer(); }
+
+// OTP box auto-advance
+document.querySelectorAll('.otp-box').forEach((box, i, all) => {
+  box.addEventListener('input', () => {
+    box.value = box.value.replace(/[^0-9]/g,'');
+    if(box.value && i < all.length-1) all[i+1].focus();
+  });
+  box.addEventListener('keydown', (e) => {
+    if(e.key === 'Backspace' && !box.value && i > 0) all[i-1].focus();
+  });
+});
+
+function verifyOtp(){
+  const boxes = document.querySelectorAll('.otp-box');
+  let code = '';
+  boxes.forEach(b => code += b.value);
+  const invalid = code.length !== 6;
+  document.getElementById('fld-otp').classList.toggle('has-error', invalid);
+  if(invalid) return;
+  goToStep(3);
+}
+
+function togglePassword(id){
+  const input = document.getElementById(id);
+  input.type = input.type === 'password' ? 'text' : 'password';
+}
+
+function checkPasswordRules(){
+  const v = document.getElementById('su-pass').value;
+  const rules = {
+    'rule-len': v.length >= 8,
+    'rule-upper': /[A-Z]/.test(v),
+    'rule-lower': /[a-z]/.test(v),
+    'rule-num': /[0-9]/.test(v),
+    'rule-special': /[^A-Za-z0-9]/.test(v)
+  };
+  let allValid = true;
+  for(const id in rules){
+    document.getElementById(id).classList.toggle('valid', rules[id]);
+    if(!rules[id]) allValid = false;
+  }
+  document.getElementById('pass-continue-btn').disabled = !allValid;
+  return allValid;
+}
+
+function submitPassword(){
+  if(!checkPasswordRules()) return;
+  const p1 = document.getElementById('su-pass').value;
+  const p2 = document.getElementById('su-pass2').value;
+  const mismatch = p1 !== p2 || p2.length === 0;
+  document.getElementById('fld-confirm-pass').classList.toggle('has-error', mismatch);
+  if(mismatch) return;
+  goToStep(4);
+}
+
+function submitProfile(){
+  const fname = document.getElementById('p-fname');
+  const lname = document.getElementById('p-lname');
+  const mobile = document.getElementById('p-mobile');
+  const address = document.getElementById('p-address');
+
+  let ok = true;
+  const fnameInvalid = fname.value.trim().length === 0;
+  document.getElementById('fld-fname').classList.toggle('has-error', fnameInvalid); if(fnameInvalid) ok = false;
+
+  const lnameInvalid = lname.value.trim().length === 0;
+  document.getElementById('fld-lname').classList.toggle('has-error', lnameInvalid); if(lnameInvalid) ok = false;
+
+  const mobileInvalid = !/^[+]?[0-9\s]{10,13}$/.test(mobile.value.trim());
+  document.getElementById('fld-mobile').classList.toggle('has-error', mobileInvalid); if(mobileInvalid) ok = false;
+
+  const addressInvalid = address.value.trim().length === 0;
+  document.getElementById('fld-address').classList.toggle('has-error', addressInvalid); if(addressInvalid) ok = false;
+
+  if(!ok) return;
+
+  document.getElementById('success-name').textContent = fname.value.trim();
+  goToStep(5);
+}
+
+(function(){
+  let deferredPrompt = null;
+  const installBtn = document.getElementById('installAppBtn');
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    if(installBtn) installBtn.classList.add('is-visible');
+  });
+
+  if(installBtn){
+    installBtn.addEventListener('click', async () => {
+      if(!deferredPrompt) return;
+      deferredPrompt.prompt();
+      await deferredPrompt.userChoice;
+      deferredPrompt = null;
+      installBtn.classList.remove('is-visible');
+    });
+  }
+
+  window.addEventListener('appinstalled', () => {
+    if(installBtn) installBtn.classList.remove('is-visible');
+  });
+
+  if('serviceWorker' in navigator){
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js').catch(() => {});
+    });
+  }
+})();
+</script>
+
+</body>
+</html>

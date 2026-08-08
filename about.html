@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us — Repair Partner</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#009999">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --teal:#009999;
+  --teal-dark:#007a7a;
+  --teal-tint:#E4F5F5;
+  --ink:#14201F;
+  --ink-soft:#54615F;
+  --border:#E3E9E8;
+  --bg-alt:#F7FAF9;
+  --white:#FFFFFF;
+  --gold:#F3A712;
+
+  --radius-card:16px;
+  --radius-btn:10px;
+  --sp-1:8px; --sp-2:16px; --sp-3:24px; --sp-4:32px; --sp-5:40px; --sp-6:48px; --sp-8:64px; --sp-10:80px;
+  --container:1180px;
+}
+*{ margin:0; padding:0; box-sizing:border-box; }
+body{ font-family:'Inter', sans-serif; color:var(--ink); background:var(--white); line-height:1.6; -webkit-font-smoothing:antialiased; }
+h1,h2,h3,h4{ font-family:'Poppins', sans-serif; font-weight:700; color:var(--ink); letter-spacing:-0.01em; }
+a{ text-decoration:none; color:inherit; }
+ul{ list-style:none; }
+img,svg{ display:block; }
+button{ font-family:inherit; cursor:pointer; }
+
+.wrap{ max-width:var(--container); margin:0 auto; padding:0 var(--sp-3); }
+section{ padding:var(--sp-8) 0; }
+
+.btn{ display:inline-flex; align-items:center; justify-content:center; gap:8px; font-weight:600; font-size:15px; padding:13px 26px; border-radius:var(--radius-btn); transition:all .18s ease; border:1.5px solid transparent; white-space:nowrap; }
+.btn:hover{ transform:translateY(-2px); }
+.btn:active{ transform:translateY(0); }
+.btn-light{ background:var(--white); color:var(--ink); }
+.btn-light:hover{ background:#EFF3F2; }
+.btn-primary{ background:var(--teal); color:var(--white); }
+.btn-primary:hover{ background:var(--teal-dark); }
+.btn-secondary{ background:var(--white); color:var(--ink); border-color:var(--border); }
+.btn-secondary:hover{ border-color:var(--teal); color:var(--teal); }
+
+/* Navbar (shared) */
+.navbar{ background:var(--teal); }
+.nav-inner{ max-width:var(--container); margin:0 auto; padding:0 var(--sp-3); height:72px; display:flex; align-items:center; justify-content:space-between; }
+.logo{ display:flex; align-items:center; gap:8px; font-family:'Poppins',sans-serif; font-weight:700; font-size:19px; color:var(--white); }
+.logo-mark{ width:30px; height:30px; border-radius:8px; background:var(--white); display:flex; align-items:center; justify-content:center; }
+.nav-links{ display:flex; gap:var(--sp-4); }
+.nav-links a{ position:relative; color:rgba(255,255,255,0.9); font-size:15px; font-weight:500; padding:4px 0; transition:color .2s ease; }
+.nav-links a::after{ content:''; position:absolute; left:0; bottom:-4px; width:0; height:2px; background:var(--white); border-radius:2px; transition:width .25s ease; }
+.nav-links a:hover, .nav-links a.active{ color:var(--white); }
+.nav-links a:hover::after, .nav-links a.active::after{ width:100%; }
+.nav-actions{ display:flex; align-items:center; gap:var(--sp-2); }
+.nav-actions .signin{ position:relative; color:rgba(255,255,255,0.9); font-size:15px; font-weight:500; transition:color .2s ease; }
+.nav-actions .signin:hover{ color:var(--white); }
+.install-btn{
+  display:none; align-items:center; gap:6px; background:rgba(255,255,255,0.14); color:var(--white);
+  border:1.5px solid rgba(255,255,255,0.4); font-size:13.5px; font-weight:600; padding:9px 14px;
+  border-radius:var(--radius-btn); transition:all .18s ease; white-space:nowrap;
+}
+.install-btn.is-visible{ display:none; }
+.install-btn:hover{ background:rgba(255,255,255,0.26); border-color:rgba(255,255,255,0.7); transform:translateY(-2px); }
+.install-btn svg{ width:16px; height:16px; flex:none; }
+.hamburger{ display:none; width:40px; height:40px; align-items:center; justify-content:center; background:none; border:none; flex:none; }
+.hamburger span{ display:block; width:20px; height:2px; background:var(--white); position:relative; }
+.hamburger span::before,.hamburger span::after{ content:''; position:absolute; left:0; width:20px; height:2px; background:var(--white); }
+.hamburger span::before{ top:-6px; } .hamburger span::after{ top:6px; }
+.mobile-drawer{ display:none; flex-direction:column; background:var(--teal-dark); max-height:0; overflow:hidden; transition:max-height .3s ease; }
+.mobile-drawer.open{ max-height:360px; overflow-y:auto; }
+.mobile-drawer a{ padding:14px var(--sp-3); color:var(--white); font-size:15px; border-top:1px solid rgba(255,255,255,0.15); transition:background .18s ease; }
+.mobile-drawer a:hover{ background:rgba(255,255,255,0.08); }
+.mobile-drawer-install{
+  display:none; width:100%; text-align:left; background:none; border:none; border-top:1px solid rgba(255,255,255,0.15);
+  color:var(--white); font-size:15px; padding:14px var(--sp-3); font-family:inherit; cursor:pointer; align-items:center; gap:8px;
+}
+.mobile-drawer-install.is-visible{ display:flex; }
+.mobile-drawer-install:hover{ background:rgba(255,255,255,0.08); }
+.mobile-drawer-install svg{ width:16px; height:16px; flex:none; }
+
+/* Page hero */
+.page-hero{ background:var(--teal); padding:var(--sp-6) 0; }
+.page-hero h1{ color:var(--white); font-size:36px; margin-bottom:8px; }
+.page-hero p{ color:rgba(255,255,255,0.88); font-size:16px; max-width:560px; }
+
+.section-head{ text-align:center; max-width:560px; margin:0 auto var(--sp-5); }
+.section-head h2{ font-size:28px; margin-bottom:8px; }
+.section-head p{ color:var(--ink-soft); font-size:16px; }
+.section-alt{ background:var(--bg-alt); }
+
+/* Story */
+.story-grid{ display:grid; grid-template-columns:1fr 1fr; gap:var(--sp-6); align-items:center; }
+.story-copy h2{ font-size:28px; margin-bottom:var(--sp-2); }
+.story-copy p{ color:var(--ink-soft); margin-bottom:var(--sp-2); font-size:15.5px; }
+.story-visual{
+  background:var(--teal-tint); border-radius:var(--radius-card); padding:var(--sp-5);
+  display:grid; grid-template-columns:1fr 1fr; gap:var(--sp-2);
+}
+.story-stat{ background:var(--white); border-radius:12px; padding:var(--sp-3); text-align:center; }
+.story-stat b{ display:block; font-family:'Poppins',sans-serif; font-size:26px; color:var(--teal-dark); }
+.story-stat span{ font-size:13px; color:var(--ink-soft); }
+
+/* story-visual hidden per current requirements (kept in markup/CSS for future re-enable) */
+.story-visual{ display:none; }
+.story-grid{ grid-template-columns:1fr; max-width:700px; margin:0 auto; }
+.story-grid .story-copy{ text-align:center; }
+.story-grid .story-copy p{ text-align:left; }
+
+/* Values */
+.values-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:var(--sp-2); }
+.value-card{ background:var(--white); border:1px solid var(--border); border-radius:var(--radius-card); padding:var(--sp-3); transition:border-color .2s ease, transform .2s ease; }
+.value-card:hover{ border-color:var(--teal); transform:translateY(-3px); }
+.icon-sq{ width:44px; height:44px; border-radius:10px; background:var(--teal-tint); display:flex; align-items:center; justify-content:center; margin-bottom:var(--sp-2); flex:none; }
+.icon-sq svg *{ stroke:var(--teal); }
+.value-card h4{ font-size:16px; margin-bottom:4px; }
+.value-card p{ font-size:13.5px; color:var(--ink-soft); }
+
+/* Timeline / process */
+.timeline{ display:grid; grid-template-columns:repeat(3,1fr); gap:var(--sp-3); }
+.timeline-item{ background:var(--white); border:1px solid var(--border); border-radius:var(--radius-card); padding:var(--sp-3); }
+.timeline-year{ display:inline-block; font-size:13px; font-weight:700; color:var(--teal-dark); background:var(--teal-tint); padding:4px 12px; border-radius:999px; margin-bottom:var(--sp-2); }
+.timeline-item h4{ font-size:16px; margin-bottom:4px; }
+.timeline-item p{ font-size:13.5px; color:var(--ink-soft); }
+
+/* CTA banner */
+.cta-banner{ background:var(--teal); text-align:center; padding:var(--sp-8) var(--sp-3); border-radius:var(--radius-card); }
+.cta-banner h2{ color:var(--white); font-size:28px; margin-bottom:8px; }
+.cta-banner p{ color:rgba(255,255,255,0.88); margin-bottom:var(--sp-3); }
+
+/* Footer (shared) */
+footer{ background:var(--bg-alt); border-top:1px solid var(--border); }
+.footer-grid{ display:grid; grid-template-columns:1.5fr 1fr 1fr 1.2fr; gap:var(--sp-4); padding:var(--sp-6) 0 var(--sp-4); }
+.footer-brand .logo{ color:var(--ink); margin-bottom:var(--sp-2); }
+.footer-brand .logo-mark{ background:var(--teal); }
+.footer-brand .logo-mark svg path{ fill:var(--white); }
+.footer-brand p{ font-size:13.5px; color:var(--ink-soft); max-width:250px; }
+footer h4{ font-size:14px; margin-bottom:var(--sp-2); }
+.footer-links li{ margin-bottom:10px; }
+.footer-links a{ font-size:13.5px; color:var(--ink-soft); }
+.footer-links a:hover{ color:var(--teal); }
+.footer-contact li{ font-size:13.5px; color:var(--ink-soft); margin-bottom:10px; }
+.footer-contact a:hover{ color:var(--teal); }
+.footer-bottom{ border-top:1px solid var(--border); text-align:center; padding:var(--sp-2) 0; font-size:12.5px; color:var(--ink-soft); }
+
+.chat-fab{ position:fixed; bottom:24px; right:24px; width:52px; height:52px; border-radius:50%; background:var(--teal); display:flex; align-items:center; justify-content:center; box-shadow:0 6px 18px rgba(0,153,153,0.35); z-index:50; }
+
+@media (max-width:900px){
+  section{ padding:var(--sp-6) 0; }
+  .nav-links, .nav-actions .signin{ display:none; }
+  .hamburger{ display:flex; }
+  .mobile-drawer{ display:flex; }
+  .page-hero h1{ font-size:28px; }
+  .story-grid{ grid-template-columns:1fr; gap:var(--sp-4); }
+  .values-grid{ grid-template-columns:1fr 1fr; }
+  .timeline{ grid-template-columns:1fr; }
+  .footer-grid{ grid-template-columns:1fr 1fr; gap:var(--sp-3); }
+  .footer-brand{ grid-column:1/-1; }
+}
+@media (max-width:480px){
+  .values-grid{ grid-template-columns:1fr; }
+  .footer-grid{ grid-template-columns:1fr; }
+  .install-btn.is-visible{ display:none; }
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="nav-inner">
+    <div class="logo">
+    <span class="logo-mark">
+        <svg width="22" height="22" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <text
+                x="50%"
+                y="52%"
+                text-anchor="middle"
+                dominant-baseline="middle"
+                font-family="Poppins, Arial, sans-serif"
+                font-size="52"
+                font-weight="650"
+                letter-spacing="-2"
+                fill="#007A7A">
+                Rp
+            </text>
+        </svg>
+    </span>
+    Repair Partner
+</div>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="about.html" class="active">About Us</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="install-btn" id="installAppBtn" aria-label="Install App" type="button">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 17v2a2 2 0 002 2h10a2 2 0 002-2v-2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Install App</span>
+      </button>
+      <a href="signin.html" class="signin">Sign In</a>
+      <a href="signup.html" class="btn btn-light">Sign Up</a>
+      <button class="hamburger" aria-label="Menu" onclick="document.querySelector('.mobile-drawer').classList.toggle('open')"><span></span></button>
+    </div>
+  </div>
+  <div class="mobile-drawer">
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="about.html">About Us</a>
+    <a href="contact.html">Contact</a>
+    <a href="signin.html">Sign In</a>
+    <a href="signup.html">Sign Up</a>
+    <button class="mobile-drawer-install" id="installAppBtnMobile" type="button">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 17v2a2 2 0 002 2h10a2 2 0 002-2v-2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Install App
+    </button>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <h1>About Repair Partner</h1>
+    <p>We started Repair Partner to fix a simple problem: getting something repaired in Pune shouldn't mean three phone calls, a lost afternoon, and a technician who never quite shows up.</p>
+  </div>
+</section>
+
+<!-- STORY -->
+<section>
+  <div class="wrap story-grid">
+    <div class="story-copy">
+      <h2>Built around one idea: repairs shouldn't be your problem to manage</h2>
+      <p>Most repair experiences put the work on you — finding a technician, negotiating a price, following up on delays, and hoping the fix actually holds. We built Repair Partner to remove every one of those steps.</p>
+      <p>Today, our technicians handle everything from kitchen appliances to power tools, picking items up from your doorstep and returning them tested, repaired, and backed by a written warranty — no showroom visit required.</p>
+      <a href="contact.html" class="btn btn-primary">Get in Touch</a>
+    </div>
+    <div class="story-visual">
+      <div class="story-stat"><b>2000+</b><span>Repairs Completed</span></div>
+      <div class="story-stat"><b>24–48 hrs</b><span>Avg. Turnaround</span></div>
+      <div class="story-stat"><b>4.9★</b><span>Customer Rating</span></div>
+      <div class="story-stat"><b>10+</b><span>Categories Repaired</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="section-alt">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>What We Stand For</h2>
+      <p>The principles every repair, pickup, and conversation runs on.</p>
+    </div>
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="icon-sq"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h10M4 17h7" stroke-width="1.8" stroke-linecap="round"/><circle cx="19" cy="17" r="2.5" stroke-width="1.8"/></svg></div>
+        <h4>Transparency</h4>
+        <p>Fair pricing, honest recommendations, and quality repairs are at the heart of everything we do.</p>
+      </div>
+      <div class="value-card">
+        <div class="icon-sq"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke-width="1.8"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <h4>Craftsmanship</h4>
+        <p>Every technician is verified and trained on the specific category they handle.</p>
+      </div>
+      <div class="value-card">
+        <div class="icon-sq"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke-width="1.8"/><path d="M12 7v5l3 3" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <h4>Reliability</h4>
+        <p>From timely pickups to on-time delivery, we respect your schedule and strive to keep every commitment we make.</p>
+      </div>
+      <div class="value-card">
+        <div class="icon-sq"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 3l7 3v6c0 5-3.5 7.5-7 9-3.5-1.5-7-4-7-9V6l7-3z" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h4>Accountability</h4>
+        <p>We stand behind the quality of every repair. If something isn't right, we'll make it right because customer satisfaction is our priority.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section>
+  <div class="wrap">
+    <div class="cta-banner">
+      <h2>Have Something That Needs Fixing?</h2>
+      <p>Tell us what's broken — we'll take it from there.</p>
+      <a href="contact.html" class="btn btn-light">Contact Us</a>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo"><span class="logo-mark"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M14 3L4 14h6l-1 7 10-11h-6l1-7z"/></svg></span>Repair Partner</div>
+        <p>Doorstep repair for appliances, electronics, power tools and more — across Pune.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul class="footer-links">
+          <li><a href="services.html">Kitchen Appliances</a></li>
+          <li><a href="services.html">Home Appliances</a></li>
+          <li><a href="services.html">Audio Devices</a></li>
+          <li><a href="services.html">Power Tools</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul class="footer-contact">
+          <li><a href="mailto:hello@repairpartner.in">hello@repairpartner.in</a></li>
+          <li><a href="tel:+919876543210">+91 98765 43210</a></li>
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 Repair Partner. All rights reserved.</div>
+  </div>
+</footer>
+
+<a href="contact.html" class="chat-fab" aria-label="Chat with us">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M21 11.5a8.5 8.5 0 01-8.5 8.5c-1.2 0-2.3-.25-3.3-.7L4 20l1-4.8A8.5 8.5 0 1121 11.5z" stroke="white" stroke-width="1.8" stroke-linejoin="round"/></svg>
+</a>
+
+<script>
+(function(){
+  let deferredPrompt = null;
+  const desktopBtn = document.getElementById('installAppBtn');
+  const mobileBtn = document.getElementById('installAppBtnMobile');
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    if(desktopBtn) desktopBtn.classList.add('is-visible');
+    if(mobileBtn) mobileBtn.classList.add('is-visible');
+  });
+
+  async function doInstall(){
+    if(!deferredPrompt) return;
+    deferredPrompt.prompt();
+    await deferredPrompt.userChoice;
+    deferredPrompt = null;
+    if(desktopBtn) desktopBtn.classList.remove('is-visible');
+    if(mobileBtn) mobileBtn.classList.remove('is-visible');
+  }
+  if(desktopBtn) desktopBtn.addEventListener('click', doInstall);
+  if(mobileBtn) mobileBtn.addEventListener('click', doInstall);
+
+  window.addEventListener('appinstalled', () => {
+    if(desktopBtn) desktopBtn.classList.remove('is-visible');
+    if(mobileBtn) mobileBtn.classList.remove('is-visible');
+  });
+
+  if('serviceWorker' in navigator){
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js').catch(() => {});
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
