@@ -191,6 +191,26 @@ input,select,textarea{ font-family:inherit; }
 }
 
 @media (max-width:480px){
+  .logo {
+    position: relative;
+    font-size: 0; /* hides original "Repair Partner" text */
+  }
+
+  /* Keep the Rp mark visible */
+  .logo .logo-mark {
+    margin-right: -6px;
+    font-size: initial; /* restore size for SVG */
+  }
+
+  /* Inject stacked text */
+  .logo::after {
+    content: "Repair\A Partner"; /* stacked text */
+    white-space: pre;            /* respect line break */
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.1;
+    color: var(--white);
+  }
   .auth-card{ padding:var(--sp-4) var(--sp-3); }
   .field-row, .field-row.three{ grid-template-columns:1fr; }
   .step-label{ display:none; }
