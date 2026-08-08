@@ -139,6 +139,26 @@ input{ font-family:inherit; }
   .topbar-nav{ display:none; }
 }
 @media (max-width:480px){
+  .logo {
+    position: relative;
+    font-size: 0; /* hides original "Repair Partner" text */
+  }
+
+  /* Keep the Rp mark visible */
+  .logo .logo-mark {
+    margin-right: -6px;
+    font-size: initial; /* restore size for SVG */
+  }
+
+  /* Inject stacked text */
+  .logo::after {
+    content: "Repair\A Partner"; /* stacked text */
+    white-space: pre;            /* respect line break */
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.1;
+    color: var(--white);
+  }
   .auth-card{ padding:var(--sp-4) var(--sp-3); }
   .topbar-inner{ height:auto; padding:12px var(--sp-3); flex-wrap:wrap; row-gap:10px; }
   .install-btn .install-text{ display:none; }
@@ -172,10 +192,6 @@ input{ font-family:inherit; }
     <nav class="topbar-nav">
     </nav>
     <div class="topbar-actions">
-      <button class="install-btn" id="installAppBtn" aria-label="Install App" type="button">
-        <svg viewBox="0 0 24 24" fill="none"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 17v2a2 2 0 002 2h10a2 2 0 002-2v-2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <span class="install-text">Install App</span>
-      </button>
       <a href="signup.html" class="btn btn-light topbar-signup-btn">Sign Up</a>
     </div>
   </div>
