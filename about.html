@@ -166,6 +166,26 @@ footer h4{ font-size:14px; margin-bottom:var(--sp-2); }
   .footer-brand{ grid-column:1/-1; }
 }
 @media (max-width:480px){
+  .logo {
+    position: relative;
+    font-size: 0; /* hides original "Repair Partner" text */
+  }
+
+  /* Keep the Rp mark visible */
+  .logo .logo-mark {
+    margin-right: -6px;
+    font-size: initial; /* restore size for SVG */
+  }
+
+  /* Inject stacked text */
+  .logo::after {
+    content: "Repair\A Partner"; /* stacked text */
+    white-space: pre;            /* respect line break */
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.1;
+    color: var(--white);
+  }
   .values-grid{ grid-template-columns:1fr; }
   .footer-grid{ grid-template-columns:1fr; }
   .install-btn.is-visible{ display:flex; }
