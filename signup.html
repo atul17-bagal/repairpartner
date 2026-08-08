@@ -47,6 +47,11 @@ input,select,textarea{ font-family:inherit; }
 .topbar-nav{ display:flex; align-items:center; gap:var(--sp-3); }
 .topbar-link{ position:relative; color:rgba(255,255,255,0.9); font-size:14.5px; font-weight:500; transition:color .2s ease; white-space:nowrap; }
 .topbar-link:hover{ color:var(--white); }
+.logo{ display:flex; align-items:center; gap:8px; font-family:'Poppins',sans-serif; font-weight:700; font-size:19px; color:var(--white); flex:none; }
+.logo-mark{ width:30px; height:30px; border-radius:8px; background:var(--white); display:flex; align-items:center; justify-content:center; }
+.topbar-nav{ display:flex; align-items:center; gap:var(--sp-3); }
+.topbar-link{ position:relative; color:rgba(255,255,255,0.9); font-size:14.5px; font-weight:500; transition:color .2s ease; white-space:nowrap; }
+.topbar-link:hover{ color:var(--white); }
 .topbar-link b{ color:var(--white); font-weight:600; }
 .topbar-actions{ display:flex; align-items:center; gap:var(--sp-2); flex:none; }
 .install-btn{
@@ -170,8 +175,21 @@ input,select,textarea{ font-family:inherit; }
 .step-panel.active{ display:block; }
 
 @media (max-width:600px){
-  .topbar-nav{ display:none; }
+  .topbar-link {
+    display:flex;
+    flex-direction:column;   /* stack vertically */
+    align-items:center;      /* center horizontally */
+    text-align:center;
+    line-height:1;
+  }
+  .topbar-link b {
+    margin-top:4px;
+    font-size:16px;
+    font-weight:700;
+    color:var(--white);
+  }
 }
+
 @media (max-width:480px){
   .auth-card{ padding:var(--sp-4) var(--sp-3); }
   .field-row, .field-row.three{ grid-template-columns:1fr; }
@@ -209,11 +227,7 @@ input,select,textarea{ font-family:inherit; }
       Repair Partner
     </a>
     <div class="topbar-actions">
-      <button class="install-btn" id="installAppBtn" aria-label="Install App" type="button">
-        <svg viewBox="0 0 24 24" fill="none"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 17v2a2 2 0 002 2h10a2 2 0 002-2v-2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <span class="install-text">Install App</span>
-      </button>
-      <a href="signin.html" class="topbar-link">Account exists? <b>Sign In</b></a>
+      <a href="signin.html" class="topbar-link">Account Exists?<b>Sign In</b></a>
     </div>
   </div>
 </header>
